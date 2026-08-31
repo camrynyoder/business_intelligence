@@ -1,0 +1,45 @@
+---
+title: "Class 3 - R Basics"
+author: Camryn Yoder
+date: "2026-08-31"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Cincy crash data
+```{r cincy_crashes}
+crashes_per_day=30125/365
+crashes_per_day
+
+crashes_by_day = c(2020L, 2241L, 2327L, 2285L,
+                   2380L, 1866L, 1664L)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu",
+                          "Fri", "Sat", "Sun")
+crashes_by_day
+
+crashes_by_day > 2100
+
+sum(crashes_by_day > 2000)   # days above 2,000
+
+mean(crashes_by_day)
+
+typeof(TRUE)     # logical
+typeof(401L)     # integer: the L
+typeof(401)      # double: no L
+typeof("401")    # character: quotes
+```
+```{r type_ofvec}
+typeof(crashes_by_day)
+
+```
+
