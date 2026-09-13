@@ -1,0 +1,99 @@
+---
+title: "Homework_4"
+author: "Camryn Yoder"
+date: "2026-09-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r readingfile}
+con = DBI::dbConnect(RSQLite::SQLite(), "data/midwest_airbnb.db")
+listings = DBI::dbReadTable(con, "listings")
+```
+
+#Question 1
+```{r q1}
+nrow(listings)
+```
+
+#Question 2
+```{r}
+#Failed codes:
+###count_columbus=listings["city"][["Columbus"]]
+###count_columbus2=listings$city[["Columbus"]]
+###count_columbus
+
+
+nrow(listings[listings$city == "Columbus", ])
+
+```
+
+
+#Question 3
+```{r}
+#filter down to just Chicago listings
+chicago_listings = listings[listings$city == "Chicago", ]
+
+#find the maximum price within that filtered subset
+max_chicago_price = max(chicago_listings$price)
+max_chicago_price
+
+#find the name of the listing that has that max price
+chicago_listings$name[chicago_listings$price == max_chicago_price]
+
+```
+
+
+#Question 4
+```{r}
+chicago_listings = listings[listings$city == "Chicago", ]
+unique_chicago_neighborhoods=unique(chicago_listings$neighbourhood)
+unique_chicago_neighborhoods
+(unique_chicago_neighborhoods)
+```
+
+
+#Question 5
+```{r}
+superhosts=listings[listings$host_is_superhost=="t",]
+sum(listings$host_is_superhost == "t", na.rm = TRUE)
+```
+
+
+#Question 6
+```{r}
+more_than_1000=listings[listings$price>1000,]
+nrow(more_than_1000)
+```
+
+#Question 7
+```{r}
+if (require(readr) == FALSE) install.packages("readr")
+
+url = "https://raw.githubusercontent.com/tidyverse/readr/main/inst/extdata/mtcars.csv"
+
+# Try base R's read.csv() directly on a URL
+base_result = read.csv(url)
+head(base_result)
+
+# Try readr's read_csv() directly on the same URL
+readr_result = readr::read_csv(url)
+head(readr_result)
+
+```
+
+
+#Question 8
+```{r}
+#read_excel() → only works with files already sitting on disk (confirmed by the "path does not exist" error).
+
+```
+
+#Question 9
+```{r}
+DBI::dbReadTable(con, "listings")
+```
+
