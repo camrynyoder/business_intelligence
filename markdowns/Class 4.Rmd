@@ -1,0 +1,142 @@
+---
+title: "Class 4"
+author: "Camryn Yoder"
+date: "2026-09-02"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_download: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Matrix cannot have column names, and only 1 data type
+#Stores more efficiently, not good for analysis 
+
+#Data frames
+```{r df}
+
+crashes_by_day = c(2020, 2241, 2327, 2285,
+                   2380, 1866, 1664)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu",
+                          "Fri", "Sat", "Sun")
+
+crashes_df = tibble::tibble(
+  day     = names(crashes_by_day),
+  crashes = crashes_by_day,
+  busy    = crashes_by_day > 2000
+)
+crashes_df
+
+#Gives a glimpse into dataframe
+#Prints neater than str()
+dplyr::glimpse(crashes_df)
+
+#Nrow
+#Ncol
+#Colnames
+#Typeof
+
+
+#A list can hold anything: different vector types and lengths
+example_list = list(
+  1:3,                    # integers 1, 2, 3
+  "a",                    # one piece of text
+  c(TRUE, FALSE, TRUE),   # three logicals
+  c(2.3, 5.9)             # two decimals
+)
+str(example_list)         # the x-ray view
+dplyr::glimpse(example_list) # neater than str()
+```
+
+#[] vs [[]]
+```{r}
+#x is the shaker. x[1] is a shaker with one packet: still a list. x[[1]] is the packet itself. x[[1]][[1]] is the pepper.
+
+str(example_list[1])     # [ ]  the shaker: a list of 1
+str(example_list[[1]])   # [[ ]] the packet: the element
+example_list[[1]][[1]]   # the pepper: first value in it
+example_list[[4]][2]     # element 4, then its 2nd value
+```
+
+
+#Examine a job AD
+```{r}
+job = list(
+  title   = "Research Data Scientist, Magic Eye",
+  company = "Google",
+  salary  = list(min = 147000, max = 210000)
+)
+dplyr::glimpse(job)
+
+job[[2]] #typically do not want this as an answer
+company_name=job$company
+
+company_name_as_named_list=job[2]
+
+company_name=job$company #job [[2]]
+
+#Max salary
+max_salary=job$salary$max
+job[[3]][[2]]
+#Kind of like [3,2] but is separated by []
+
+#Names of elements in job list
+names(job)
+```
+
+# () = function
+# [] = getting an element from environment
+
+
+#Subsetting a vector aka getting a subset of the object's data
+#Cannot use $ with vector
+```{r vectors}
+
+crashes_by_day = c(2020, 2241, 2327, 2285, 2380, 1866, 1664)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu",
+                          "Fri", "Sat", "Sun")
+crashes_by_day[2:4]                      # you can give consecutive numbers, returns Tuesday Wednesday Thursday
+
+crashes_by_day[c("Mon", "Fri")]         #crashes_by_day[c(1,5)] , must concatenate to make it 1D
+
+crashes_by_day["Fri"]                  # by name
+
+crashes_by_day[crashes_by_day > 2300]  # by condition
+
+#You can subset by position/number or by name if it is a named vector;\
+#You can also pass a vector (logical condition, 2:4, or c(,)) for subsetting the vector
+```
+
+
+
+#Subsetting a dataframe
+#A tibble= a dataframe that has some extra
+```{r}
+crashes_df = tibble::tibble(
+  day     = names(crashes_by_day),
+  crashes = crashes_by_day,
+  busy    = crashes_by_day > 2000)
+
+crashes_df$crashes                     # one column, as a vector
+
+crashes_df[["crashes"]]                # the same vector, by name
+
+crashes_df[1:2, c("day", "crashes")]   # rows 1 to 2, two columns
+```
+
+
+
+
+```{r}
+oh_jobs=readr::read_csv(
+  file="https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23ebf3fb&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1320&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=IHLIDXUSOH&scale=left&cosd=2021-08-28&coed=2026-08-28&line_color=%230073e6&link_values=false&line_style=solid&mark_type=none&mw=3&lw=3&ost=-99999&oet=99999&mma=0&fml=a&fq=Daily%2C%207-Day&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2026-09-02&revision_date=2026-09-02&nd=2020-02-01"
+)
+
+```
+

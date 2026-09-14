@@ -1,0 +1,111 @@
+---
+title: "Class 5"
+author: "Camryn Yoder"
+date: "2026-09-09"
+output: 
+  html_document:
+  toc: true
+  toc_float: true
+  numbered_sections: true
+  code_download: true
+  code_folding: show
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Trying to understand [] and [[]]
+[ ]  — hands you back another box, containing whatever you asked for. Even if you only ask for one item, you still get it wrapped — same data type as what you started with.
+[[ ]]  — reaches inside and hands you the actual thing itself, unwrapped. No box, just the contents.
+
+[[ ]] can only ever grab one item at a time (there's only one "thing" to hand you).
+[ ] can grab one or many, and always keeps you inside "list-land" (or "data-frame-land").
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#Game 1: Subsetting lists
+```{r game1}
+
+campus = jsonlite::fromJSON(
+  "https://isa401-find-your-seat.vercel.app/campus.json")
+
+names(campus)
+
+fsb<-campus$Farmer #Equivalent to campus[['Farmer']] by NAME or campus[[5]] by POSITION
+names(fsb)
+fsb$code
+
+```
+
+#Level 2
+```{r}
+
+names(fsb) #Pulling by NAME
+
+fsb[[8]] #Pulling by POSITION in the Farmer object
+
+fsb[[8]][[3]] #The third element from the eighth element. Goes into item 8, then takes item 3 from item 8
+
+fsb[[8]]$`2`$sections ##in the 8th element of fsb, find the sub-list NAMED '2', and pull out its sections field.
+
+sec_floor = fsb[[8]]$`2` #Setting the sublist NAMED 2 from the 8th element of fsb equal to the name sec_floor
+
+sec_floor_rooms = sec_floor[[3]]
+```
+
+#Level 3
+```{r}
+#didnt get to it
+```
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Reading the Excel file
+```{r readingExcel}
+
+library(readxl) #Installing readxl 
+
+occupation = readxl::read_excel(
+  path="../data/occupation.xlsx",
+  sheet=5, #sheet = 'Table 1.4" #Reads the 5th sheet
+  skip=1 #Skips the first row of the sheet
+)
+
+```
+
+#Updating the occupation data
+```{r updatingExcel}
+
+occupation=occupation[-c(32,33,34),] #drops rows 32, 33 and 34 from the RESULTING dataframe, c combines them into 1 thing for R to get rid of
+
+
+#R dataframes are df[rows,columns] BEFORE the , picks rows, AFTER picks columns. leaving space after , means keep EVERY column.
+#Instead of that space could do --> 1:7 ----- ex:[-c(32,33,34), 1:7] ----> says drop rows 32-34, and keep only columns 1-7
+
+```
+
+
+#A web-served JSON file
+```{r read_json}
+
+json_url = "https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json?$limit=100"
+
+crashes_json = jsonlite::fromJSON(json_url)
+dplyr::glimpse(crashes_json)
+
+```
+
+#Data import for cybersecurity game
+```{r}
+logins = readr::read_csv("https://isa401-import-heist.vercel.app/api/stage1")
+
+
+log = jsonlite::fromJSON("https://isa401-import-heist.vercel.app/api/stage2?key=ACCOUNT&seat=L1-7&s=B")
+
+
+```
+
