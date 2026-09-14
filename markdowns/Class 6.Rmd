@@ -1,0 +1,32 @@
+---
+title: "Class 6"
+author: "Camryn Yoder"
+date: "2026-09-14"
+output: 
+  html_document:
+  toc: TRUE
+  toc_float: TRUE
+  code_download: TRUE
+  number_sections: TRUE
+  code_folding: show
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Code from class 6:
+```{r reading_game}
+run = readr::read_csv(
+  "https://isa401-find-your-seat.vercel.app/api/export?section=A&run=13")
+dplyr::glimpse(run)
+```
+
+
+#HW 04
+```{r hw04}
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/midwest_airbnb.db")
+listings = DBI::dbReadTable(con, "listings")
+```
+

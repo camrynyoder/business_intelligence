@@ -1,2 +1,4 @@
 *.exe
 /.Rproj.user
+.Renviron
+apikey.txt
