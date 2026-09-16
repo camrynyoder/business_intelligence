@@ -1,0 +1,91 @@
+---
+title: "Class 7"
+author: "Camryn Yoder"
+date: "2026-09-16"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#dyplyr pipeline
+```{r}
+
+library(dplyr)
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/scout.db")
+postings = DBI::dbReadTable(con, "scout_postings") |> tibble::as_tibble()
+DBI::dbDisconnect(con)
+
+jobs = postings |>
+  dplyr::select(company, title, location_state, remote, category, posted_at, last_seen_at)
+
+glimpse(postings)
+```
+
+#dyplyr terms
+```{r}
+select() #Columns. Keep some, drop some, reorder.
+#Similar to SELECT
+
+filter() #Rows. Keep the rows where a test is TRUE.
+#Similar to WHERE
+
+arrange() #Order. Sort by one or more columns; desc() for largest first.
+#Similar to ORDER BY
+
+mutate() #New columns computed from old ones; the row count never changes.
+#similar to SELECT ... AS
+
+group_by() + summarize() #One row per group. n() counts, mean() averages; count() is the shortcut.
+#Similar to GROUP BY
+
+left_join() #Two tables, one key. Add columns from a second table where the key matches.
+#similar to JOIN
+```
+
+
+#dplyr pipeline
+```{r}
+jobs |>
+  dplyr::select(company, location_state, remote, posted_at, last_seen_at) |>
+  dplyr::filter(remote == 1) |>
+  dplyr::mutate(days_open = as.numeric(as.Date(last_seen_at) - as.Date(posted_at))) |>
+  dplyr::arrange(dplyr::desc(days_open)) |>
+  dplyr::group_by(company) |>
+  dplyr::summarize(n = dplyr::n(), avg_days = mean(days_open))
+```
+
+
+#Demo
+```{r}
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/scout.db")
+postings = DBI::dbReadTable(con, "scout_postings") |> tibble::as_tibble()
+DBI::dbDisconnect(con)
+
+jobs = postings |>
+  dplyr::select(company, title, location_state, remote, category, posted_at, last_seen_at) |>
+  dplyr::mutate(dplyr::across(dplyr::ends_with("_at"), as.Date),
+                days_open = as.numeric(last_seen_at - posted_at))
+
+jobs
+
+
+#Q1: which cat is remote friendly
+#Find the number of jobs per category
+#Then normalize the number of remote jobs per category by dividing by total jobs 
+
+jobs |>
+  #I want to move from unit of analysis being a job posting to a category
+  dplyr::group_by(category) |>
+  dplyr::summarise(
+    postings = dplyr::n(),
+    remote_share = mean(remote)
+  )
+```
+
