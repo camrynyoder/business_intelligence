@@ -15,6 +15,11 @@ date: "2026-09-21"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+#API: application programming interface
+#Which requests you may send, how to write them, and what comes back. Written for programs, not for people clicking.
+
+
 #left_join() keeps the left table whole and adds the right table's columns. Where no partner exists, the new cells are NA, which is a fact worth knowing, not an error.
 
 #Joins in practice
@@ -88,7 +93,99 @@ listings|>
 httr2::request("https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json") |> #Specifies request to get data from that link
   httr2::req_url_query("$limit" = 5) |> #Reconstructs URL for limit=5
   httr2::req_perform() |> #Executing request
-  httr2::resp_body_string() |> #Response in a string
+  httr2::resp_body_string() |> #Response in a data frame
   jsonlite::fromJSON() -> cincy_crashes
+```
+
+#STATUS CODES
+#200: OK
+#400: Bad request
+#404: Not found
+#401/403: Unauthorized
+#429: Too many requests
+#500: Server error
+
+
+#Fred API key
+```{r}
+httr2::request("https://api.stlouisfed.org/fred/series/observations") |>
+  httr2::req_url_query(
+    series_id = "IHLIDXUSOH",
+    api_key = Sys.getenv("FRED_API_KEY"),
+    file_type = "json"
+  ) |>
+  # nothing has been sent yet
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON() -> ohio_jobs
+
+jobs_df=ohio_jobs[[13]]
+
+#to get data from september 1 2026
+
+#a: get all data and then filter rows i want
+dplyr::glimpse(jobs_df)
+jobs_df |> 
+  dplyr::mutate(
+    date = lubridate::ymd(date)
+  ) |> 
+  dplyr::filter(date >= '2026-09-01') -> jobs_df_mod
+
+#rewrote date column as a date, it was character before
+
+
+#b: use API since it had observation_start
+httr2::request("https://api.stlouisfed.org/fred/series/observations") |>
+  httr2::req_url_query(
+    series_id = "IHLIDXUSOH",
+    api_key = Sys.getenv("FRED_API_KEY"),
+    file_type = "json",
+    observation_start="2026-09-01"
+  ) |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON() -> ohio_jobs_sep_2026
+
+ohio_jobs_sep_2026_df=ohio_jobs_sep_2026$observations #saves the observations as a data frame
+```
+
+
+#USA Jobs API
+```{r}
+httr2::request("https://data.usajobs.gov/api/search") |>
+  httr2::req_url_query(Keyword = "Data Analyst", ResultsPerPage = 500) |>
+  httr2::req_headers(
+    Host = "data.usajobs.gov",
+    "User-Agent" = "yodercn@miamioh.edu",
+    "Authorization-Key" = Sys.getenv("USAJOBS_API_KEY")
+  ) |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON(flatten = TRUE) -> usa_jobs_list
+
+usa_df = usa_jobs_list$SearchResult$SearchResultItems
+
+jobs_small = usa_df |>
+  dplyr::select(
+    title = MatchedObjectDescriptor.PositionTitle,
+    department = MatchedObjectDescriptor.DepartmentName,
+    agency = MatchedObjectDescriptor.OrganizationName,
+    location = MatchedObjectDescriptor.PositionLocationDisplay,
+    closes = MatchedObjectDescriptor.ApplicationCloseDate
+  )
+```
+
+1. How many federal postings match "Data Analyst" today?
+2. Which three departments have the most of them?
+```{r}
+
+table(jobs_small$department) |> sort(decreasing=T) |> head(3)
+
+index_data_analyst = jobs_small$title |> 
+  stringr::str_detect(pattern = 'Data Analyst|Data Analytics')
+
+jobs = jobs_small[index_data_analyst, ]
+table(jobs$department)
+
 ```
 
