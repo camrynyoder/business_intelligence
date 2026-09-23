@@ -1,0 +1,94 @@
+---
+title: "Class 8"
+author: "Camryn Yoder"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+date: "2026-09-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#left_join() keeps the left table whole and adds the right table's columns. Where no partner exists, the new cells are NA, which is a fact worth knowing, not an error.
+
+#Joins in practice
+```{r}
+states = tibble::tibble(location_state = state.abb,
+                        state_name = state.name,
+                        region = as.character(state.region))
+jobs |>
+  dplyr::left_join(states, by = "location_state") |>
+  dplyr::group_by(region) |>
+  dplyr::summarize(postings = dplyr::n(), remote_share = mean(remote)) |>
+  dplyr::arrange(dplyr::desc(postings))
+```
+
+
+
+#AirBNB practice
+```{r}
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/midwest_airbnb.db")
+listings = DBI::dbReadTable(con, "listings") |>
+  tibble::as_tibble()
+DBI::dbDisconnect(con)
+dplyr::glimpse(listings)
+
+#Listings per city
+#I can group by city and count number of listings in each
+
+listings |> dplyr::group_by(city) |> dplyr::summarise(count=dplyr::n()) 
+
+#The shortcut for the code above 
+
+listings |> dplyr::count(city) #count does group by and then n ()
+
+#another option is to count number of times each city occurred in the city column
+
+table(listings$city) #returns a named vector vs above is a data frame
+
+#For entire homes (room_type == "Entire home/apt") that sleep four or more, what is the median price in each city?
+
+listings |> 
+  dplyr::filter(room_type=="Entire home/apt", accommodates>=4
+  ) |>
+  dplyr::group_by(city) |>
+  dplyr::summarise(
+    median_price=median(price)
+  )
+
+#Which 3 listings are the cheapest per person
+#for the sake of printing nicely, reduce # of columns
+
+listings |>
+  dplyr::mutate(price_per_person=price/accommodates) |>
+  dplyr::select(city, host_name, name, accommodates, price_per_person) |>
+  dplyr::arrange(price_per_person)
+
+
+#What 5 host names have most listings, host names are not unique but host ids are
+
+listings|>
+  dplyr::count(host_name, sort=T)
+
+
+#groups by both host name and host id to try to find unique host
+listings|>
+  dplyr::count(host_name, host_id, sort=T)
+```
+
+
+#API step-by-step
+```{r}
+httr2::request("https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json") |> #Specifies request to get data from that link
+  httr2::req_url_query("$limit" = 5) |> #Reconstructs URL for limit=5
+  httr2::req_perform() |> #Executing request
+  httr2::resp_body_string() |> #Response in a string
+  jsonlite::fromJSON() -> cincy_crashes
+```
+

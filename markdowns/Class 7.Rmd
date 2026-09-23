@@ -59,6 +59,8 @@ jobs |>
   dplyr::arrange(dplyr::desc(days_open)) |>
   dplyr::group_by(company) |>
   dplyr::summarize(n = dplyr::n(), avg_days = mean(days_open))
+
+jobs
 ```
 
 
@@ -73,8 +75,6 @@ jobs = postings |>
   dplyr::mutate(dplyr::across(dplyr::ends_with("_at"), as.Date),
                 days_open = as.numeric(last_seen_at - posted_at))
 
-jobs
-
 
 #Q1: which cat is remote friendly
 #Find the number of jobs per category
@@ -87,5 +87,42 @@ jobs |>
     postings = dplyr::n(),
     remote_share = mean(remote)
   )
+```
+By state
+```{r}
+con = DBI::dbConnect(RSQLite::SQLite(), "../data/scout.db")
+postings = DBI::dbReadTable(con, "scout_postings") |> tibble::as_tibble()
+DBI::dbDisconnect(con)
+
+jobs = postings |>
+  dplyr::select(company, title, location_state, remote, category, posted_at, last_seen_at) |>
+  dplyr::mutate(dplyr::across(dplyr::ends_with("_at"), as.Date),
+                days_open = as.numeric(last_seen_at - posted_at))
+```
+
+Showing combo of category and state
+```{r}
+jobs |>
+  dplyr::group_by(category, location_state) |>
+  dplyr::summarise(
+    positions=dplyr::n(),
+    remote_share=mean(remote)
+  )  |> 
+  dplyr::arrange(dplyr::desc(remote_share)) |>
+  na.omit()
+  
+
+#Notes logic
+#Grouping by 1 thing, location, and filter category
+jobs |>
+  dplyr::filter(category=='fulltime')|>
+   dplyr::group_by(category, location_state) |>
+  dplyr::summarise(
+    positions=dplyr::n(),
+    remote_share=mean(remote)
+  )  |> 
+  dplyr::arrange(dplyr::desc(remote_share)) |>
+  na.omit()
+  
 ```
 
