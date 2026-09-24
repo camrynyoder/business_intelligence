@@ -16,17 +16,106 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Code from class 6:
-```{r reading_game}
+# Kahoot
+```{r kahoot}
 run = readr::read_csv(
   "https://isa401-find-your-seat.vercel.app/api/export?section=A&run=13")
 dplyr::glimpse(run)
+
 ```
 
+Notes from Kahoot:
+- A vector is a container where every element must be the same type. A list is a container where every element can be a different type, like other lists, or data frames.
 
-#HW 04
+- read_excel() needs a file on disk, so we downloaded in browser and NOT read its web address
+
+- read_excel(.............. skip=1) means to skip title row above header
+
+- [] gives back the thing itself, can only 'request' 1 at a time
+  - [[]] gives a list
+  
+- fromJSON() is better than read_json()
+  - read_csv() is better than read.csv
+  
+- dttm data type: short for daytime -> date and time
+
+
+# HW 04
 ```{r hw04}
 con = DBI::dbConnect(RSQLite::SQLite(), "../data/midwest_airbnb.db")
 listings = DBI::dbReadTable(con, "listings")
 ```
+
+
+# Class 6
+```{r reading_data}
+con = DBI::dbConnect(RSQLite::SQLite(),
+                     "../data/scout.db")
+DBI::dbListTables(con)
+postings = DBI::dbReadTable(con, "scout_postings")
+DBI::dbDisconnect(con)
+dplyr::glimpse(postings[, c("title", "company",
+  "location_state", "remote", "skills_json")]) #takes all rows ([,c...]) and combines hose 5 columns into 1 vector
+
+#package::function()
+
+```
+
+
+# Ask the database a question in SQL
+```{r ask_question_in_SQL}
+con = DBI::dbConnect(RSQLite::SQLite(),
+                     "../data/scout.db") #connection
+top_remote = DBI::dbGetQuery(con, "
+  SELECT company, COUNT(*) AS n
+  FROM scout_postings
+  WHERE remote = 1
+  GROUP BY company
+  ORDER BY n DESC
+  LIMIT 10") #SQL query
+DBI::dbDisconnect(con)
+top_remote
+
+#dbReadTable() is SELECT * FROM scout_postings with no filter.
+```
+
+
+# JSON inside a cell
+```{r}
+first_cell = postings$skills_json[1]
+cat(strtrim(first_cell, 60))   # base R: first 60 characters
+
+skills = jsonlite::fromJSON(first_cell)
+skills
+
+# postings$skills_json[1] is vector, then element; fromJSON() then turns text into structure.
+```
+
+
+# Part 2: First App
+
+```{r first_app}
+
+# apps/job_scout_chat/app.R
+library(querychat)
+
+con = DBI::dbConnect(RSQLite::SQLite(), "data/scout.db")
+
+client = ellmer::chat_openai(
+  model  = "gpt-5.6-luna",
+  params = ellmer::params(reasoning_effort = "none")
+)
+
+
+qc = querychat(
+  con, "scout_postings",
+  client   = client,
+  tools    = c("filter", "query", "visualize"),
+  greeting = "Ask me about the 1,891 job postings
+              ChatISA Job Scout collected."
+)
+
+qc$app_obj()
+```
+
 
