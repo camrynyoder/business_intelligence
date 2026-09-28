@@ -1,0 +1,97 @@
+---
+title: "Class 10"
+author: "Camryn Yoder"
+date: "2026-09-28"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Web Scraping
+
+Miami bulletin example
+- We use robotstxt package
+```{r miami_bulletin}
+robotstxt::paths_allowed(paths = "/courses-instruction/isa/", domain = "bulletin.miamioh.edu", bot = "*")
+
+#Returns TRUE - means we are allowed to scrape it
+#robots.txt is a request from site owner
+```
+
+Indeed example
+```{r indeed}
+robotstxt::paths_allowed(paths = "/jobs", "/viewjob", domain = "www.indeed.com", bot = "*") #returns TRUE
+```
+
+Wikipedia example
+```{r wikipedia}
+robotstxt::paths_allowed(paths = "/wiki/Miami_RedHawks_football", domain = "en.wikipedia.org", bot = "*") #returns TRUE
+```
+
+LinkedIn example
+```{r linkedin}
+robotstxt::paths_allowed(paths = "/jobs/", domain = "www.linkedin.com", bot = "*") #retuns FALSE
+
+#in some cases, the robotstxt provides inconsistent answers 
+#typically you get a warning with the answer that's wrong
+#solution: remove the last / from the URL
+```
+
+# Scraping workflow
+```{r}
+
+wiki_url = "https://en.wikipedia.org/wiki/Miami_RedHawks_football"
+
+robotstxt::paths_allowed(paths = "/wiki/Miami_RedHawks_football",
+                         domain = "en.wikipedia.org", bot = "*")
+
+wiki_page = httr2::request(wiki_url) |>
+  httr2::req_user_agent("ISA 401 class scraper (your_email@miamioh.edu)") |>
+  httr2::req_perform() |>
+  httr2::resp_body_html()
+
+wiki_tables = wiki_page |>
+  rvest::html_elements("table.wikitable") |>
+  rvest::html_table()
+
+length(wiki_tables)
+
+bowl_games = wiki_tables[[4]]
+bowl_games
+
+```
+
+# Scrape Miami's bulletin for ISA
+```{r isabulletin}
+#check if we can scrape
+robotstxt::paths_allowed(paths = "/courses-instruction/isa/", domain = "bulletin.miamioh.edu", bot = "*")
+
+#now load backend of HTML into R using rvest::read_html() or using rvest::read_html_live() if there's dynamic content
+
+#in some cases we will craft as a request as shown in slides, like httr2::request() |> ... httr2::resp_body_html()
+
+isa_courses_in_r = rvest::read_html("https://bulletin.miamioh.edu/courses-instruction/isa/")
+
+#we will extract the course titles in a single pipeline since they look the same on the webpage in chrome
+#CSS selector was obtained by highlighting what we want to pull (401 course title) -> right click -> inspect -> copy -> copy selector
+
+#we got just title for ISA401 because we had ':nth-child(24) - if you drop you get all of the course titles
+isa_courses_in_r |>
+  rvest::html_elements("#sc_sccoursedescs > div > p.courseblocktitle > strong") |>
+  rvest::html_text2() -> isa_titles
+
+#descriptions using selector gadget
+isa_courses_in_r |>
+  rvest::html_elements(".courseblockdesc") |>
+  rvest::html_text2() -> isa_descs
+
+df=data.frame(title= isa_titles, description = isa_descs)
+```
+
