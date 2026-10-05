@@ -1,0 +1,120 @@
+---
+title: "Class 12"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_download: true
+    code_folding: show
+date: "2026-10-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Continuing with plane crash example
+```{r crashes}
+year = 2025
+
+crash_url=paste0('https://www.planecrashinfo.com/', year, '/', year, '.htm')
+
+crash_page=rvest::read_html(crash_url, encoding = "ISO-8859-1")
+
+crash_tables <- crash_page |>
+  rvest::html_elements("table") |>
+  rvest::html_table()
+
+#[1] translate into df rather than a list
+#[2] replace current headers with row 1 and delete row 1
+#[3] convert data into data type
+#[4] More complex cleaning to split multiple info within a cell into separate columns
+
+#[1]
+#Translate into a data frame
+crash_df=crash_tables[[1]] #subsetting a list 
+
+#[2]
+colnames(crash_df) = crash_df[1, ]
+crash_df = crash_df[-1, ]
+
+#[3]
+#convert date column into date type
+crash_df = crash_df |>
+  dplyr::mutate(Date = lubridate::dmy(Date))
+
+dplyr::glimpse(crash_df)
+```
+
+
+# Web Scraping Game
+```{r game}
+page = rvest::read_html("https://isa401-salvage.vercel.app/registry?start=1")
+classes = page |>
+  rvest::html_elements(".Dreadnought") |>
+  rvest::html_text2()
+length(classes)
+
+
+
+#Level 3
+
+base = "https://isa401-salvage.vercel.app"
+starts = seq(from = 1, to = 351, by = 50)
+pages = vector("list", length(starts)) #initializing a list
+for (i in seq_along(starts)) {
+  pg = rvest::read_html(paste0(base, "/registry?start=", starts[i]))
+  pages[[i]] = data.frame(
+     class = pg |>
+       rvest::html_elements(".ship-class") |>
+       rvest::html_text2(),
+    value = pg |>
+      rvest::html_elements(".salvage-value") |>
+      rvest::html_text2() |> 
+      readr::parse_number()
+  )
+  Sys.sleep(1)   # robots.txt asks for it
+}
+registry = dplyr::bind_rows(pages)   # 400 rows?
+
+dreadnought_df=registry |>
+  dplyr::filter(class=="Dreadnought")
+
+sum(dreadnought_df$value)
+```
+
+
+# Using LLM
+```{r}
+
+#Schema, the columns we want - stored as type_course
+
+course_text = "ISA 401. Business Intelligence Visualization (3). Prerequisite: ISA 291 or STA 261."
+type_course = ellmer::type_object(
+  code = ellmer::type_string(
+    "Subject and number. For example, ISA 401"
+  ),
+  name = ellmer::type_string(
+    "Name of the course, without the code"
+  ),
+  credit_hours = ellmer::type_integer(
+    "The number in parentheses after the name",
+    required = FALSE
+  ),
+  prereqs = ellmer::type_string(
+    "The prerequisite[s] for this course",
+    required = FALSE
+  )
+)
+
+#Send the text and schema to the model
+chat = ellmer::chat_openai(
+  model = "gpt-5-mini-2025-08-07"
+)
+chat$chat_structured(
+  course_text, type = type_course
+)
+```
+
