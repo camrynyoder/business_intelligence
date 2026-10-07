@@ -1,0 +1,55 @@
+---
+title: "Assignment_7"
+author: "Camryn Yoder"
+date: "2026-10-06"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_download: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r assignment7}
+# Check robots.txt first
+robotstxt::paths_allowed(paths = "/fsb/directory", domain = "miamioh.edu", bot = "*")
+
+# Department names 
+dept_names = c("Accountancy", "Economics", "Entrepreneurship", "Finance", "Information Systems and Analytics", "Marketing", "Management")
+
+# Takes one department name, returns a data frame for that department
+scrape_fsb_dept = function(dept){dept_url = paste0("https://miamioh.edu/fsb/directory/?up=/query/all/all/",URLencode(dept), "/all")   # URLencode() turns spaces into %20 (had to use chatISA for help)
+  
+  webpage = rvest::read_html(dept_url)
+  
+   # Name: inside <strong> in each table cell
+  webpage |>
+    rvest::html_elements("td strong a") |>
+    rvest::html_text2() |>
+    stringr::str_remove("(Faculty|Staff)sfx.*") -> names
+  
+  # Website: the href attribute of that same link
+  webpage |>
+    rvest::html_elements("td strong a") |>
+    rvest::html_attr("href") -> websites
+  
+  # Position: italic text under each name
+  webpage |>
+    rvest::html_elements("td i") |>
+    rvest::html_text2() |>
+    stringr::str_squish() -> positions
+
+df = data.frame(department = dept, name = names, position = positions, website = websites)
+return(df)
+}
+
+# Apply function to all departments
+fsb_directory = purrr::map_df(.x = dept_names, .f = scrape_fsb_dept)
+
+head(fsb_directory)
