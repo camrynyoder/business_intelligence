@@ -86,35 +86,63 @@ sum(dreadnought_df$value)
 ```
 
 
-# Using LLM
-```{r}
+# ISA125 Extraction
+```{r isa125}
+chat = ellmer::chat_openai(
+  model="gpt-5.6-luna"
+)
 
-#Schema, the columns we want - stored as type_course
+isa125_courseblock = rvest::read_html("https://bulletin.miamioh.edu/courses-instruction/isa/") |>
+  rvest::html_elements("#sc_sccoursedescs > div:nth-child(1)") |>
+  rvest::html_text2()
 
-course_text = "ISA 401. Business Intelligence Visualization (3). Prerequisite: ISA 291 or STA 261."
-type_course = ellmer::type_object(
-  code = ellmer::type_string(
-    "Subject and number. For example, ISA 401"
-  ),
-  name = ellmer::type_string(
-    "Name of the course, without the code"
-  ),
-  credit_hours = ellmer::type_integer(
-    "The number in parentheses after the name",
-    required = FALSE
-  ),
-  prereqs = ellmer::type_string(
-    "The prerequisite[s] for this course",
-    required = FALSE
+chat$chat_structured(
+  isa125_courseblock,
+  type = ellmer::type_object(
+   #code is th name of the first element in the returned sublist
+    #type_string forces that element to be of type character
+     code = ellmer::type_string(
+       description = "The three letter abbreviation for the course and its number. For example, ISA 999 or FIN 444"
+     ),
+     name = ellmer::type_string(
+       description = "The title of the course without the three letter abbreviation and the number. For example, Introduction to Macroeconomics. Do not return a period after the name."
+     ),
+     cr_hr = ellmer::type_integer(description = "The number of credits shown in parentheses after the course code and title.")
   )
 )
-
-#Send the text and schema to the model
-chat = ellmer::chat_openai(
-  model = "gpt-5-mini-2025-08-07"
-)
-chat$chat_structured(
-  course_text, type = type_course
-)
 ```
+    
+# All 50 ISA courses
+```{r allisa}
+chat = ellmer::chat_openai(
+  model="gpt-5.6-luna"
+)
+
+course_vec = rvest::read_html("https://bulletin.miamioh.edu/courses-instruction/isa/") |>
+  rvest::html_elements(".courseblock") |> rvest::html_text2()
+
+
+course_list = as.list(course_vec) #make it a list
+
+
+type_course = type = ellmer::type_object(
+     code = ellmer::type_string(
+       description = "The three letter abbreviation for the course and its number. For example, ISA 999 or FIN 444"
+     ),
+     name = ellmer::type_string(
+       description = "The title of the course without the three letter abbreviation and the number. For example, Introduction to Macroeconomics. Do not return a period after the name."
+     ),
+     cr_hr = ellmer::type_integer(description = "The number of credits shown in parentheses after the course code and title.")
+  )
+
+isa_df = ellmer::parallel_chat_structured(
+  chat = chat,
+  prompts = course_list,
+  type = type_course,
+  include_tokens = T,
+  include_cost = T
+)
+
+sum(isa_df$cost)
+```    
 
