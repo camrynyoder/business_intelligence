@@ -1,0 +1,101 @@
+link,address,house_name,price_text,rent_type,residents,bedrooms,bathrooms,company,scrape_date
+https://redbrickmiami.com/listings/216-n-college-ave-2/,216 N. College Ave.,Cheeks,"$3,500",SEMESTER,3,3,1,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/320-n-campus/,320 N. CAMPUS,Ragenomics,,SEMESTER,5-8,5,4,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/215-n-poplar-unit-6/,"215 N POPLAR, UNIT 6",THE CIRCLE LOFTS,,SEMESTER,2,2,1,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/333-n-locust-st/,333 N. Locust St.,Smashed Pumpkins,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/33-w-church-st/,33 W Church St,Above the Law,,SEMESTER,3,3,1.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/115-s-college-ave/,115 S. College,Beer Necesseties,,Semester,7,7,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/112-north-college-avenue/,112 North College Ave.,Fat Bottom,,SEMESTER,12,12,8,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/412-n-poplar-st-new-construction/,414 N. Poplar St.,BIG HOUSE,,Semester,12,12,13,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/322-s-main-st-2/,322 S. Main St.,Gucci on Main,,SEMESTER,10,10,4 Full/ 3 Half,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/1-w-high-st-loft-402/,"1 W. High St., 402-403",Lofts at 1 W. High,,Semester,8,8,4 Full / 2 Half,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/124-130-w-church-st-st-paulys-girls/,124-130 W. Church St.,St. Pauli's Girls,,Semester,10,9,5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/117-w-high-uptown-girls/,117 - 117.5 W. High St.,Uptown Girls,,Semester,13,13,10,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/200-s-campus-ave/,200 S CAMPUS AVE,WHITE CASTLE,,SEMESTER,10,8,2.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/12-n-college-2/,12 N COLLEGE,UPTOWN FLATS,,Semester,10,10,4,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/211-211-5-s-poplar-the-ocho/,211-211.5 S. Poplar St.,The Ocho,,SEMESTER,8,5,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/514-s-main-main-chick/,514 S. Main St.,Main Chick,,SEMESTER,8-10,9,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/16-w-collins/,16 W. Collins,BOOTY CLIFF,,SEMESTER,8,5,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/116-east-church-street-blue-lagoon/,116 E Church Street,Blue Lagoon,,SEMESTER,8-10,6,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/101-e-walnut-tailgate/,101 E. Walnut St.,Tailgate,,Semester,8,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/301-n-poplar-corner-pocket/,301 N. Poplar St.,Corner Pocket,,Semester,8-10,8,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/111-e-church-st-loft-201-metropolitan-lofts-above-quarter-barrel/,"111 E. Church St., 2nd Floor",AQB,,Semester,8,8,4 Full /1 Half,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/321-n-college-avenue/,321 N. College Unit 1 & 2,Down to Fiesta,,SEMESTER,8,8,4,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/216-w-church/,216 - 218 W CHURCH ST,The Confession Booth,,SEMESTER,8,8,7,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/204-n-main-st-2/,204 N Main St,Katasrophe,,SEMESTER,8,6,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/117-e-walnut/,117 E Walnut,Bubbles & Baubles,,SEMESTER,8,8,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/115-115-5-south-elm/,115-115.5 S. Elm St.,Lite W8s,,SEMESTER,8,8,4,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/14-n-campus-ave/,14 N Campus Ave.,The Bean,,SEMESTER,8,7,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/230-w-church/,230 W CHURCH ST,TEXAS,,SEMESTER,8-11,8,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/315-e-withrow/,315 E WITHROW,BOOM BOX,,SEMESTER,8,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/118-120-homestead/,118-120 HOMESTEAD,MOJO DOJO CASA,,SEMESTER,6-8,8,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/24-e-central-ave/,24 E. Central Ave.,Yes Way Rose,,SEMESTER,8,8,4,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/204-s-college-the-tree-house/,204 S College,The Tree House,,SEMESTER,5,5,1,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/218-n-campus-ave/,"218 N Campus Ave, Front",PUCKER UP,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/112-s-college-rock-bottom/,112 S College,Rock Bottom,,SEMESTER,8-10,8,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/1-w-high-st-loft-202/,"1 W. High St., Loft 202-203",Lofts at 1 W. High,,Semester,8,8,4 full/ 2 half,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/one-west-high-loft-401-2/,"One West High St., Loft 401",LOFTS AT 1 W HIGH,,Semester,4,4,3.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/111-e-church-st-3rd-floor-metropolitan-lofts-above-churchstsocial/,"111 E. Church St., 3rd Fl.",AQB,,Semester,8,8,4.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/214-w-church-new-renovation/,214 W. Church St.,The Big Lehouski,,Semester,7,7,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/101-e-church-b-c-the-confessional/,101 E. Church St.,The Confessional,,Semester,7-8,6,3.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/211-213-n-campus-one-night-stand/,211-213 N. Campus,Keg Stand,,SEMESTER,7,7,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/317-n-main-st/,317 - 319 N. Main St.,TRIMMED BUSHES,,SEMESTER,7,7,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/10-e-collins-lyre-lyre-2/,10 E. Collins St.,Lyre Lyre,,Semester,7,5,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/401-e-chestnut-4/,401 E Chestnut St.,The Cottage,,SEMESTER,6,6,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/141-w-high-unit-308/,"141 W. High St., Loft 308",THE HARRISON,,SEMESTER,3,3,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/131-w-high-st-loft-10/,NA,NA,NA,NA,NA,NA,NA,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/131-w-high-st-loft-209/,NA,NA,"Address: 141 W. High St., Loft 209House Name: THE HARRISONCity: 4 PERSONState: Rent Type: SEMESTER Number of Residents: 4Bedrooms: 4Bathrooms: 2Additional Features:",NA,NA,NA,NA,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/131-w-high-st-loft-204/,"141 W. High St., Loft 204",THE HARRISON,,SEMESTER,2,2,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/323-n-beech-st/,323 N. Beech St.,Corner,,SEMESTER,4,4,4.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/1-w-high-st-loft-204/,"1 W. High St., Loft 204",Lofts at 1 W. High,,Semester,4,4,3 Full baths/ 1 half bath,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/605-607-e-chestnut-casual-six/,605-607 E Chestnut,Blue Balls,,SEMESTER,6,6,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/111-111-5-n-college-avenue/,NA,NA,NA,NA,NA,NA,NA,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/141-w-high-st-unit-203/,"141 W. High St., Unit 203",THE HARRISON,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/760-s-poplar-central-perk/,760 S. Poplar,Central Perk,,SEMESTER,5-7,5,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/311-n-elm/,311 N Elm St.,,,Semester,3,3,2.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/106-e-spring-st-2/,NA,NA,NA,NA,NA,NA,NA,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/1-w-high-st-loft-403/,"1 W. High St., Loft 301",Lofts at 1 W. High,,Semester,4,4,3.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/12-n-college-unit-b/,"12 N COLLEGE, UNIT B",UPTOWN FLATS,,SEMESTER,5,5,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/215-n-poplar-unit-2/,"215 N POPLAR, UNIT 2",CIRCLE APARTMENTS,,SEMESTER,2,2,1,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/110-w-vine-st/,110 W Vine St,Danger Zone,,Semester,5,5,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/19-5-n-poplar-loft-a-above-the-woods/,"19.5 N. Poplar, Loft A",The Chateau,,Semester,4,4,1,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/24-w-vine/,NA,NA,NA,NA,NA,NA,NA,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/124-willow-lane-knox-box/,124 Willow Lane,Blockbuster,,SEMESTER,4,4,4.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/131-w-high-st-loft-11/,"141 W. High St., Loft 303",THE HARRISON,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/110-w-sycamore/,110 W. Sycamore,Finding Pinot,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/222-n-college-avenue/,NA,NA,NA,NA,NA,NA,NA,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/333-w-church-the-white-house/,333 W. Church,"EAT, PRAY, DRINK",,Semester,4,4,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/604-s-main-st-the-miami-house/,604 S. Main St.,The Womb,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/10-n-beech-st-loft-304/,"10 N. Beech St., Loft 304",PRINCESS,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/303/,"One West High, Loft 303",Lofts at 1 W High St.,,Semester,4,4,4 Full/ 1 half bath,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/114-east-church-shock-top/,114 East Church,Shock Topless,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/117-west-sycamore/,117 West Sycamore,Flock Off,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/218-n-college-ave-2/,218 N College Ave.,,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/7-w-walnut/,7 W Walnut,,,SEMESTER,4,4,3.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/14-e-spring/,14 E Spring St.,Titos & Tatas,,SEMESTER,3,3,1,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/10-n-beech-st-loft-202-princess-theater/,"10 N. Beech St., Loft 202",Princess,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/216-w-high-st/,216 W. High St,4 The Girls,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/10-n-beech-loft-401-the-penthouse/,"10 N. Beech St., Loft 401",LAST UNIT LEFT!,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/100-w-vine-toofineforvine/,100 W Vine,2 Fine 4 Vine,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/809-s-beech-st-new-construction/,809 S Beech St,Alcohol You Later,,SEMESTER,4,4,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/304-n-main-st/,304 N Main St.,Smush Room,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/318-n-campus-orange-crush/,318 N Campus,Tropical Trash Can,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/504-n-lincoln-2/,504 N Lincoln,President's Cabinet,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/317-n-beech-st/,317 N. Beech St.,The Mouse Trap,,SEMESTER,4-5,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/918-silvoor-lane-silvoor-belles/,918 Silvoor,LONG JOHN,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/327-w-church-st/,327 W Church,White Lotus,,SEMESTER,4-5,5,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/309-n-beech-st/,309 N Beech St.,SEX ON THE BEECH,,SEMESTER,4,4,3,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/1-w-high-st-loft-304/,"1 W. High St., Loft 304",Lofts at 1 W. High,,Semester,4,4,3.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/220-e-withrow-st/,220 E. Withrow,Sunday Red,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/1-w-high-st-loft-404/,"1 W. High St., Loft 404",Lofts at 1 W. High,,Semester,4,4,3.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/14-e-vine-st/,14 E VINE ST,,,SEMESTER,4,4,4,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/420-north-beech-st-4-person-new-construction/,420 N. POPLAR,Hot Box,,SEMESTER,4,4,4.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/32-west-vine-st-boobie-trap/,32 W. Vine St.,DO IT FOR THE VINE,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/28-west-vine-st/,28 W. Vine St.,CORKSCREW,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/219-n-college-ave/,219 N College Ave.,You Had me At Merlot,,SEMESTER,4,4,4.5,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/17-w-collins/,17 W Collins,DADDY'S GIRLS,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/117-5-w-sycamore-st-2/,117.5 W Sycamore St,Nude Beeches,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/126-plum-st/,126 Plum St.,Moby Deck,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/141-w-high-st-309-311/,"141 W. High St., Unit 309",THE HARRISON,,SEMESTER,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/10-n-beech-st-loft-201/,"10 N. Beech St., Loft 201",PRINCESS APTS,,Semester,4,4,2,Red Brick,2026-11-23
+https://redbrickmiami.com/listings/211-n-college/,211 N College,Last Resort,,Semester,4,4,4.5,Red Brick,2026-11-23

@@ -1,0 +1,123 @@
+---
+title: "401exam1"
+author: "Camryn Yoder"
+date: "2026-10-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r q1}
+penguins = readr::read_csv("https://raw.githubusercontent.com/fmegahed/isa401/main/data/penguin_captures.csv")
+library(dplyr)
+penguins |>
+  dplyr::group_by(species) |>
+  dplyr::summarise(n_penguins = dplyr::n_distinct(band)) |>
+  dplyr::arrange(dplyr::desc(n_penguins))
+```
+
+```{r q2}
+crashes_by_day = c(2020, 2241, 2327, 2285, 2380, "1866", 1664)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+sum(crashes_by_day > 300)
+```
+
+
+```{r}
+library(ellmer)
+
+# 1. Create a chat object
+chat = ellmer::chat_openai(
+  model = "gpt-5.6-luna", # the class API key only works with 5.6 luna
+  params = ellmer::params(reasoning_effort = "none")
+)
+
+# 2. Define the Airbnb listing description
+description <- "This one of a kind, turn of the century, fully restored mansion is just waiting for you to come and enjoy the vast amenities this house offers! This historic Victorian Mansion was built in the last 1800's and has been fully restored and updated with one thing in mind--luxury! We boast a slate pool table, 10 person hot tub, a custom made fire table, a built in giant projector screen for streaming, arcade games, and much much more! We comfortably sleep 19 guests with 9 dedicated bedrooms."
+
+# 3. Define the structured output schema
+schema <- ellmer::type_object(
+  property_type = ellmer::type_string(),
+  max_guests = ellmer::type_integer(),
+  num_bedrooms = ellmer::type_integer(),
+  key_amenities = ellmer::type_string(
+    "List key amenities separated by |"
+  )
+)
+
+# 4. Extract structured information
+result <- chat$chat_structured(
+  description,
+  type = schema
+)
+
+# 5. Display results
+print(result)
+```
+
+
+```{r q7}
+
+base = "https://isa401-salvage.vercel.app"
+starts = seq(from = 1, to = 321, by = 40)
+pages = vector("list", length(starts))
+
+for (i in seq_along(starts)) {
+  pg = rvest::read_html(paste0(base, "/exam/registry?start=", starts[i]))
+  pages[[i]] = data.frame(
+    class = pg |> rvest::html_elements("div > ul > li:nth-child(1) > span") |> rvest::html_text2()
+  )
+  Sys.sleep(1) # robots.txt asks for it
+}
+
+registry = dplyr::bind_rows(pages) # 360 rows?
+classes = registry$class
+
+registry |> dplyr::filter(class == "Dreadnought") |> nrow()
+table(registry$class)
+```
+
+
+```{r q6}
+library(httr2)
+
+req <- request("https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json") |>
+  req_url_query(
+    `$select` = "count(*) as crashes",
+    `$where` = "crash_date >= '2026-07-01T00:00:00' AND crash_date < '2026-08-01T00:00:00'"
+  )
+
+resp <- req_perform(req)
+resp_body_json(resp)[[1]]$crashes
+
+
+
+
+library(httr2)
+
+resp <- request("https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json") |>
+  req_url_query(
+    `$select` = "count(*) AS n",
+    `$where` = "crashdate >= '2026-07-01T00:00:00' AND crashdate < '2026-08-01T00:00:00'"
+  ) |>
+  req_perform() |>
+  resp_body_json()
+
+as.integer(resp[[1]]$n)
+
+
+
+
+
+httr2::request("https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json") |>
+  httr2::req_url_query(
+    "$select" = "count(distinct instanceid) AS crashes",
+    "$where" = "crashdate >= '2026-07-01T00:00:00' AND crashdate < '2026-08-01T00:00:00'"
+  ) |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON()
+```

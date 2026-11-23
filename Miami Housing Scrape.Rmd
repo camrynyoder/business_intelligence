@@ -1,0 +1,59 @@
+---
+title: "Miami Housing Scrape"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Get Miami University's on-campus housing cost from its cost-of-attendance page, to use as a benchmark for off-campus rent.
+
+## Check permission
+```{r robots}
+robotstxt::paths_allowed(paths = "/onestop/costs/coa-by-cohort.html", domain = "miamioh.edu")
+```
+
+## Read every table on the page
+```{r tables}
+coa_page = rvest::read_html("https://miamioh.edu/onestop/costs/coa-by-cohort.html")
+coa_nodes = coa_page |> rvest::html_elements("table")
+miami_tables = coa_nodes |> rvest::html_table()
+
+# the heading above each table, so we know which cohort/campus it is
+headings = purrr::map_chr(.x = coa_nodes, .f = \(t) t |>
+  rvest::html_element(xpath = "preceding::*[self::h2 or self::h3 or self::h4][1]") |>
+  rvest::html_text2())
+
+length(miami_tables)
+headings
+names(miami_tables[[1]])
+
+# the Housing row from every table
+purrr::map(.x = miami_tables, .f = \(t) t |>
+  dplyr::filter(dplyr::if_any(1, \(x) stringr::str_detect(x, "Housing"))))
+```
+
+## Save the raw tables and keep the benchmark
+```{r benchmark}
+# all 5 tables with their headings, saved as raw data
+miami_all = purrr::map2_df(.x = miami_tables, .y = seq_along(miami_tables),
+                           .f = \(t, i) t |> dplyr::mutate(table_number = i, heading = headings[i]))
+readr::write_csv(miami_all, "data/miami_coa_raw.csv")
+
+# the benchmark: 2027 cohort, Oxford on-campus housing
+miami_tables[[1]] |>
+  dplyr::filter(stringr::str_detect(Description, "Housing")) |>
+  dplyr::transmute(
+    benchmark    = "Miami on-campus housing (2027 cohort)",
+    per_semester = readr::parse_number(`Per Semester`),
+    per_year     = readr::parse_number(Annually),
+    per_month    = per_year / 9   # school year is about 9 months
+  ) -> miami_housing
+
+miami_housing
+readr::write_csv(miami_housing, "data/miami_housing.csv")
+```

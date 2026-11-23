@@ -1,0 +1,130 @@
+---
+title: "Zumper Scrape"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Scrape all Oxford, OH rental listings from Zumper. The large listing sites (Apartments.com, ApartmentFinder, Homes.com, ForRent) blocked us with status 403, and Redfin returned 429. Zumper allowed scraping and stores its listing data as JSON inside the page.
+
+## Download the page
+```{r download}
+zp = httr2::request("https://www.zumper.com/apartments-for-rent/oxford-oh") |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  rvest::read_html()
+```
+
+## Pull out the hidden listing data
+```{r state}
+state_txt = zp |>
+  rvest::html_elements("script") |>
+  rvest::html_text() |>
+  purrr::keep(\(x) stringr::str_detect(x, "__PRELOADED_STATE__"))
+
+start = stringr::str_locate(state_txt, "__PRELOADED_STATE__ = ")[1, "end"] + 1
+rest = substr(state_txt, start, nchar(state_txt))
+end = stringr::str_locate(rest, ";\\s*\n")[1, "start"] - 1
+state = jsonlite::fromJSON(substr(rest, 1, end), flatten = TRUE)
+```
+
+## Find the listings
+```{r find}
+search_results = state[['currentSearch']][['listables']][['listables']]
+nearby = state[['currentSearch']][['listables']][['nearby']][['matches']][['listables']]
+
+zumper = dplyr::bind_rows(
+  search_results |> dplyr::mutate(source_group = "search"),
+  nearby |> dplyr::mutate(source_group = "nearby")
+)
+nrow(zumper)
+dplyr::glimpse(zumper)
+```
+
+## Save the raw data
+```{r save}
+zumper |>
+  dplyr::mutate(scrape_date = Sys.Date()) |>
+  dplyr::select(dplyr::where(\(x) !is.list(x))) |>
+  readr::write_csv("data/zumper_oxford_raw.csv")
+```
+
+## Clean
+```{r clean}
+zumper |>
+  dplyr::filter(city == "Oxford") |>
+  dplyr::transmute(
+    listing_id,
+    company = brokerage_name,
+    building_name,
+    address,
+    zipcode,
+    lat, lng,
+    property_type_code = property_type,
+    min_price, max_price, previous_price,
+    min_bedrooms, max_bedrooms,
+    min_bathrooms, max_bathrooms,
+    floorplan_count,
+    min_sqft = dplyr::if_else(min_square_feet > 1e6 | min_square_feet < 0, NA_real_, min_square_feet),
+    max_sqft = dplyr::if_else(max_square_feet < 0, NA_integer_, max_square_feet),
+    date_available = as.Date(date_available),
+    listed_on = as.Date(as.POSIXct(listed_on, origin = "1970-01-01")),
+    has_fees,
+    title,
+    description = short_description,
+    link = paste0("https://www.zumper.com", url),
+    source_group,
+    scrape_date = Sys.Date()
+  ) -> zumper_clean
+
+zumper_clean = zumper_clean |>
+  dplyr::mutate(property_type = dplyr::case_when(
+    property_type_code == 13 ~ "House",
+    property_type_code %in% c(4, 9) ~ "Apartment",
+    TRUE ~ "Other"
+  ))
+
+nrow(zumper_clean)
+readr::write_csv(zumper_clean, "data/zumper_oxford_clean.csv")
+```
+
+## Check what the property type codes mean
+```{r types}
+items = zp |>
+  rvest::html_elements("script[type='application/ld+json']") |>
+  rvest::html_text() |>
+  purrr::pluck(1) |>
+  jsonlite::fromJSON(flatten = TRUE) |>
+  purrr::pluck("mainEntity", "itemListElement")
+
+zumper_clean |>
+  dplyr::left_join(
+    items |> dplyr::select(address = item.about.address.streetAddress, type_label = `item.about.@type`),
+    by = "address"
+  ) |>
+  dplyr::count(property_type_code, type_label)
+```
+
+## Check Zumper's houses page for more listings
+```{r houses}
+get_zumper = function(url) {
+  pg = httr2::request(url) |> httr2::req_perform() |> httr2::resp_body_string() |> rvest::read_html()
+  txt = pg |> rvest::html_elements("script") |> rvest::html_text() |>
+    purrr::keep(\(x) stringr::str_detect(x, "__PRELOADED_STATE__"))
+  start = stringr::str_locate(txt, "__PRELOADED_STATE__ = ")[1, "end"] + 1
+  rest = substr(txt, start, nchar(txt))
+  end = stringr::str_locate(rest, ";\\s*\n")[1, "start"] - 1
+  st = jsonlite::fromJSON(substr(rest, 1, end), flatten = TRUE)
+  Sys.sleep(1)
+  return(st[['currentSearch']][['listables']][['listables']])
+}
+
+houses = get_zumper("https://www.zumper.com/houses-for-rent/oxford-oh")
+nrow(houses)
+sum(!houses$listing_id %in% zumper$listing_id) # how many are new
+```

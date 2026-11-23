@@ -1,0 +1,66 @@
+---
+title: "LLM Extract"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Use an LLM (ellmer) to pull structured details out of each listing's description: what the price covers, extra fees, utilities, furniture, lease length and property type.
+
+## Load keys and data
+```{r setup2}
+readRenviron("~/.Renviron")
+nchar(Sys.getenv("OPENAI_API_KEY")) > 0
+
+combined = readr::read_csv("data/combined_listings.csv")
+to_extract = combined |> dplyr::filter(!is.na(description))
+nrow(to_extract)
+```
+
+## What we want the LLM to pull out
+```{r type}
+listing_type = ellmer::type_object(
+  price_basis = ellmer::type_enum(values = c("per_person", "whole_unit", "not_stated"),
+    description = "Is the listed rent charged per person/bed, or for the whole unit?"),
+  price_period = ellmer::type_enum(values = c("per_month", "per_semester", "per_year", "not_stated"),
+    description = "What time period does the listed rent cover?"),
+  extra_monthly_fees = ellmer::type_number(
+    description = "Total required monthly fees on top of rent, like a flat utility fee, in dollars. 0 if none are mentioned."),
+  utilities_included = ellmer::type_enum(values = c("yes", "partial", "no", "not_stated"),
+    description = "Are utilities included in the rent?"),
+  furnished = ellmer::type_enum(values = c("yes", "no", "not_stated"),
+    description = "Is the unit furnished?"),
+  lease_length = ellmer::type_enum(values = c("12_months", "academic_year", "other", "not_stated"),
+    description = "How long is the lease?"),
+  property_type = ellmer::type_enum(values = c("apartment_complex", "apartment", "house", "not_stated"),
+    description = "Is this a unit in a large apartment complex, an apartment in a small building, or a house?")
+)
+```
+
+## Function to extract one listing
+```{r function}
+extract_one = function(i) {
+  chat = ellmer::chat_openai(
+    model = "gpt-5.6-luna",
+    system_prompt = "You extract details from rental listings in Oxford, Ohio. Only use information stated in the text. If something is not stated, answer not_stated.",
+    params = ellmer::params(reasoning_effort = "none")
+  )
+  out = chat$chat_structured(to_extract$description[i], type = listing_type)
+  out$link = to_extract$link[i]
+  return(as.data.frame(out))
+}
+
+extract_one(1) # test on one listing first
+```
+
+## Run on every listing and save
+```{r run}
+llm_fields = purrr::map_df(.x = seq_len(nrow(to_extract)), .f = extract_one)
+readr::write_csv(llm_fields, "data/llm_fields.csv")
+llm_fields
+```

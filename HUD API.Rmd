@@ -1,0 +1,38 @@
+---
+title: "HUD API"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Get HUD's Fair Market Rents for Oxford (ZIP 45056) from the HUD API. The token is stored as an environment variable, never in this file.
+
+## Check the token is set (prints TRUE/FALSE, not the token)
+```{r token}
+readRenviron("~/.Renviron")
+nchar(Sys.getenv("HUD_API_KEY")) > 0
+```
+
+## Request Butler County's Fair Market Rents
+```{r request}
+resp = httr2::request("https://www.huduser.gov/hudapi/public/fmr/data/3901799999") |>
+  httr2::req_headers(Authorization = paste("Bearer", Sys.getenv("HUD_API_KEY"))) |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON()
+
+names(resp$data)
+```
+
+## Keep Oxford's ZIP code and save
+```{r oxford}
+fmr_all = as.data.frame(resp$data$basicdata)
+oxford_fmr = fmr_all |> dplyr::filter(zip_code == "45056")
+oxford_fmr
+readr::write_csv(oxford_fmr, "data/hud_fmr_45056.csv")
+```

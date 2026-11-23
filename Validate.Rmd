@@ -1,0 +1,82 @@
+---
+title: "Validate"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Combine the listings with the LLM fields and HUD's Fair Market Rents, then list every record that breaks a data-quality rule and what we did about it.
+
+## Read the saved data
+```{r read}
+combined = readr::read_csv("data/combined_listings.csv")
+llm      = readr::read_csv("data/llm_fields.csv")
+hud      = readr::read_csv("data/hud_fmr_45056.csv")
+miami    = readr::read_csv("data/miami_coa_raw.csv")
+```
+
+## Join the listings with the LLM fields and HUD's rent by bedroom count
+```{r join}
+hud_long = hud |>
+  tidyr::pivot_longer(cols = -zip_code, names_to = "unit_size", values_to = "fmr") |>
+  dplyr::mutate(bedrooms = dplyr::case_when(
+    unit_size == "Efficiency"    ~ 0,
+    unit_size == "One-Bedroom"   ~ 1,
+    unit_size == "Two-Bedroom"   ~ 2,
+    unit_size == "Three-Bedroom" ~ 3,
+    unit_size == "Four-Bedroom"  ~ 4
+  )) |>
+  dplyr::select(bedrooms, fmr)
+
+combined |>
+  dplyr::left_join(llm |> dplyr::rename(llm_property_type = property_type), by = "link") |>
+  dplyr::left_join(hud_long, by = "bedrooms") -> listings
+
+readr::write_csv(listings, "data/listings_joined.csv")
+```
+
+## Validation rules
+```{r validate}
+flag = function(df, rule, action) {
+  df |> dplyr::transmute(dataset = "listings", record = address, source, rule = rule, action = action)
+}
+
+listing_flags = dplyr::bind_rows(
+  listings |> dplyr::filter(!keep) |>
+    flag("Duplicate: same building listed on another site", "Excluded; kept the higher-priority site's version"),
+  listings |> dplyr::filter(is.na(price)) |>
+    flag("Missing price", "Excluded from price comparisons"),
+  listings |> dplyr::filter(keep, is.na(bedrooms)) |>
+    flag("Missing bedrooms", "Excluded from HUD comparison"),
+  listings |> dplyr::filter(keep, bedrooms > 4) |>
+    flag("More than 4 bedrooms (no HUD benchmark)", "Excluded from HUD comparison"),
+  listings |> dplyr::filter(keep, !is.na(fmr), price > 2 * fmr, price_period %in% c("not_stated", NA)) |>
+    flag("Price over 2x HUD rent and price period not stated", "Flagged as price period unclear"),
+  listings |> dplyr::filter(keep, !is.na(description), nchar(description) < 30) |>
+    flag("Listing gives no details ('Contact for details.')", "LLM fields left as not_stated"),
+  listings |> dplyr::filter(keep, !is.na(property_type),
+                            llm_property_type %in% c("house", "apartment", "apartment_complex"),
+                            (property_type == "House") != (llm_property_type == "house")) |>
+    flag("Site and LLM disagree on property type", "Kept the site's type; noted the disagreement")
+)
+
+miami_flags = miami |>
+  dplyr::mutate(sem = readr::parse_number(`Per Semester`), yr = readr::parse_number(Annually)) |>
+  dplyr::filter(!is.na(sem), !is.na(yr), sem * 2 != yr) |>
+  dplyr::transmute(dataset = "Miami cost of attendance",
+                   record = paste0(Description, " (table ", table_number, ")"),
+                   source = "miamioh.edu",
+                   rule = "Per-semester amount x 2 does not equal annual amount",
+                   action = "Noted as an error on Miami's page; this row is not used in our analysis")
+
+validation = dplyr::bind_rows(listing_flags, miami_flags)
+
+dplyr::count(validation, rule)
+validation
+readr::write_csv(validation, "data/validation_table.csv")
+```

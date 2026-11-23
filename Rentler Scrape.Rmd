@@ -1,0 +1,81 @@
+---
+title: "Rentler Scrape"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Scrape Oxford, OH listings from Rentler. The search page lists links to each listing, and each listing page stores its details as JSON.
+
+## Check permission
+```{r robots}
+robotstxt::paths_allowed(paths = "/places-for-rent/oh/oxford", domain = "rentler.com")
+```
+
+## Get the listing links
+```{r links}
+rt = rvest::read_html("https://www.rentler.com/places-for-rent/oh/oxford")
+rt_json = rt |> rvest::html_elements("script[type='application/ld+json']") |> rvest::html_text()
+rt_data = jsonlite::fromJSON(rt_json, flatten = TRUE)
+rt_items = rt_data[["@graph"]][["itemListElement"]][[3]]
+nrow(rt_items)
+```
+
+## Function to read one listing page
+```{r function}
+get_rentler = function(url) {
+  pg = rvest::read_html(url)
+  blocks = pg |> rvest::html_elements("script[type='application/ld+json']") |> rvest::html_text()
+  graph = jsonlite::fromJSON(blocks[1], flatten = TRUE)[["@graph"]]
+  listing = graph[1, ] |>
+    dplyr::select(dplyr::where(\(x) !is.list(x))) |>
+    dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+  listing$link = url
+  Sys.sleep(1)
+  return(listing)
+}
+
+get_rentler(rt_items$item[1]) # test on one
+```
+
+## Scrape all listings and save
+```{r scrape}
+rentler_raw = purrr::map_df(.x = rt_items$item, .f = purrr::possibly(get_rentler, otherwise = NULL)) |>
+  dplyr::mutate(scrape_date = Sys.Date())
+readr::write_csv(rentler_raw, "data/rentler_oxford_raw.csv")
+
+nrow(rentler_raw)
+dplyr::glimpse(rentler_raw)
+```
+
+## Clean
+```{r clean}
+rentler_raw |>
+  dplyr::transmute(
+    source         = "Rentler",
+    address        = offers.itemOffered.address.streetAddress,
+    zipcode        = offers.itemOffered.address.postalCode,
+    lat            = as.numeric(offers.itemOffered.geo.latitude),
+    lng            = as.numeric(offers.itemOffered.geo.longitude),
+    property_type  = offers.itemOffered.accommodationCategory,
+    price          = as.numeric(offers.price),
+    price_unit     = offers.priceSpecification.referenceQuantity.unitCode,
+    bedrooms       = as.numeric(offers.itemOffered.numberOfBedrooms),
+    bathrooms      = as.numeric(offers.itemOffered.numberOfBathroomsTotal),
+    sqft           = as.numeric(offers.itemOffered.floorSize.value),
+    date_available = as.Date(offers.availabilityStarts),
+    date_posted    = as.Date(datePosted),
+    description,
+    link,
+    scrape_date
+  ) -> rentler_clean
+
+dplyr::count(rentler_clean, property_type)
+rentler_clean |> dplyr::select(address, property_type, price, bedrooms, sqft)
+readr::write_csv(rentler_clean, "data/rentler_oxford_clean.csv")
+```

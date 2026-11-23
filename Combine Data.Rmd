@@ -1,0 +1,95 @@
+---
+title: "Combine Data"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Combine the Zumper, Rentler and ApartmentList listings into one table with the same columns, then flag buildings that appear on more than one site.
+
+## Read the saved data
+```{r read}
+zumper  = readr::read_csv("data/zumper_oxford_clean.csv")
+rentler = readr::read_csv("data/rentler_oxford_clean.csv")
+alist   = readr::read_csv("data/apartmentlist_oxford_raw.csv")
+```
+
+## Give every source the same columns
+```{r standardize}
+zumper |>
+  dplyr::mutate(address = dplyr::if_else(stringr::str_detect(address, "^[0-9]+$"), building_name, address)) |>
+  dplyr::transmute(
+    source = "Zumper", name = dplyr::coalesce(building_name, address), address, company,
+    property_type = dplyr::case_when(property_type_code == 13 ~ "House",
+                                     property_type_code %in% c(4, 9) ~ "Apartment",
+                                     TRUE ~ "Other"),
+    price = min_price, price_max = max_price,
+    bedrooms = min_bedrooms, bedrooms_max = max_bedrooms,
+    bathrooms = min_bathrooms, sqft = min_sqft,
+    lat, lng, description, link, scrape_date
+  ) -> zumper_std
+
+rentler |>
+  dplyr::transmute(
+    source = "Rentler", name = address, address, company = NA_character_,
+    property_type = NA_character_,  # Rentler labels everything "Apartment", so we take type from Zumper
+    price, price_max = price, bedrooms, bedrooms_max = bedrooms,
+    bathrooms, sqft, lat, lng, description, link, scrape_date
+  ) -> rentler_std
+
+alist |>
+  dplyr::filter(stringr::str_detect(url, "/oh/oxford/")) |>
+  dplyr::distinct(url, .keep_all = TRUE) |>
+  dplyr::transmute(
+    source = "ApartmentList", name, address = name, company = NA_character_,
+    property_type = NA_character_,
+    price = offers.lowPrice, price_max = offers.highPrice,
+    bedrooms = NA_real_, bedrooms_max = NA_real_, bathrooms = NA_real_, sqft = NA_real_,
+    lat = NA_real_, lng = NA_real_, description = NA_character_,
+    link = url, scrape_date
+  ) -> alist_std
+```
+
+## Combine and flag buildings listed on more than one site
+```{r combine}
+make_key = function(x) {
+  x |>
+    stringr::str_to_lower() |>
+    stringr::str_remove_all("\\.") |>
+    stringr::str_squish() |>
+    stringr::str_extract("^[0-9]+ ([nsew] )?[a-z]+")  # e.g. "321 s main"
+}
+
+building_info = zumper_std |>
+  dplyr::mutate(addr_key = make_key(address)) |>
+  dplyr::filter(!is.na(addr_key)) |>
+  dplyr::distinct(addr_key, .keep_all = TRUE) |>
+  dplyr::select(addr_key, company_z = company, type_z = property_type)
+
+dplyr::bind_rows(zumper_std, rentler_std, alist_std) |>
+  dplyr::mutate(addr_key = make_key(address)) |>
+  dplyr::left_join(building_info, by = "addr_key") |>
+  dplyr::mutate(
+    company       = dplyr::coalesce(company, company_z),
+    property_type = dplyr::coalesce(property_type, type_z),
+    priority      = dplyr::case_when(source == "Rentler" ~ 1, source == "Zumper" ~ 2, TRUE ~ 3)
+  ) |>
+  dplyr::group_by(addr_key) |>
+  dplyr::mutate(n_sites = dplyr::n_distinct(source), best = min(priority)) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(
+    n_sites = dplyr::if_else(is.na(addr_key), 1L, n_sites),
+    keep    = is.na(addr_key) | priority == best
+  ) |>
+  dplyr::select(-company_z, -type_z, -priority, -best) -> combined
+
+dplyr::count(combined, source, keep)
+dplyr::count(combined |> dplyr::filter(keep), property_type)
+dplyr::count(combined |> dplyr::filter(keep), company)
+readr::write_csv(combined, "data/combined_listings.csv")
+```

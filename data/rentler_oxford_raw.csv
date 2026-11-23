@@ -1,0 +1,250 @@
+@type,@id,name,description,url,datePosted,logo,email,breadcrumb.@id,potentialAction.@type,potentialAction.target.@type,potentialAction.target.urlTemplate,offers.@type,offers.price,offers.priceCurrency,offers.availability,offers.availabilityStarts,offers.priceSpecification.@type,offers.priceSpecification.priceCurrency,offers.priceSpecification.price,offers.priceSpecification.referenceQuantity.@type,offers.priceSpecification.referenceQuantity.value,offers.priceSpecification.referenceQuantity.unitCode,offers.itemOffered.@type,offers.itemOffered.name,offers.itemOffered.description,offers.itemOffered.accommodationCategory,offers.itemOffered.hasMap,offers.itemOffered.numberOfBedrooms,offers.itemOffered.numberOfBathroomsTotal,offers.itemOffered.address.@type,offers.itemOffered.address.streetAddress,offers.itemOffered.address.addressLocality,offers.itemOffered.address.addressRegion,offers.itemOffered.address.postalCode,offers.itemOffered.address.addressCountry,offers.itemOffered.geo.@type,offers.itemOffered.geo.latitude,offers.itemOffered.geo.longitude,offers.itemOffered.floorSize.@type,offers.itemOffered.floorSize.value,offers.itemOffered.floorSize.unitCode,provider.@id,link,offers.itemOffered.petsAllowed,scrape_date
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997143,"615 Ogden Ct, Oxford, OH, 45056","UNDER NEW MANAGEMENT
+A newly remodeled 1,046 sq ft three-bedroom, two-level townhome at Oxford West in Oxford, OH, with all three bedrooms upstairs, a half bath on the main floor and modern finishes throughout, minutes from Uptown Oxford.
+
+MONTHLY COST
+• Total due monthly: $1,750
+• Rent: $1,450
+• Flat utility fee: $300
+• The flat utility fee covers select utilities, so budgeting is simple. Ask our leasing team for details on what's included.
+
+THE HOME
+• Layout: two-level townhome with three bedrooms and a full bath upstairs, plus living, dining, kitchen and a half bath on the main floor
+• Size: 1,046 sq ft
+• Kitchen: stainless steel appliances
+• Laundry: in-home washer and dryer in select homes. Join a live virtual tour with your dedicated leasing manager to see what's available.
+• Heating and cooling: heating and air conditioning
+• Flooring: LVT flooring
+• Outdoor space: private balcony or patio in select homes
+
+THE COMMUNITY
+• Resort-style outdoor pool
+• Clubhouse and resident lounge
+• Outdoor lounge and fire pit
+• Secure package lockers
+• High-speed internet
+• Resident events
+• Free parking throughout the community
+
+AMENITIES INCLUDED
+• In the home: Two-Level Townhome, Three Bedrooms Upstairs, Half Bath on Main Floor, Washer/Dryer (select homes), Air Conditioning, Heating, Stainless Steel Appliances, Oven/Range, Refrigerator, Vinyl Flooring, Balcony/Patio (select homes), High Speed Internet Access
+• Community: Pool, Clubhouse, Lounge, Fire Pit, Package Service, Free Parking (Surface Lot), Pet Friendly (Dogs Allowed, Cats Allowed)
+• Services: Maintenance on Site, 24-Hour Emergency Maintenance, Online Rent Payment, Online Maintenance Requests
+
+LOCATION
+Uptown Oxford's restaurants, cafés and shops are minutes away, with Kroger and Walmart close by for everyday errands. Hueston Woods State Park is a short drive north for hiking and the lake, and Miami University and McCullough-Hyde Memorial Hospital are both nearby. US-27 and OH-73 connect you to the wider region, with Cincinnati within an hour's drive.
+
+Whether you want more space, an easier commute or everyday essentials close to home, Oxford West has it all.
+
+WHY RESIDENTS CHOOSE RENEWED
+• In-house maintenance team with 24/7 emergency support
+• Non-emergency maintenance requests are handled in under 48 hours on average, but usually quicker
+• Pay rent and submit maintenance requests online through the resident portal
+• Every home is cleaned, fully inspected and move-in ready
+• Complete applications are typically processed within 24 hours, often the same day
+
+LEASE TERMS
+• Lease length: 12 months
+• Security deposit: $1,750
+
+PETS
+• Cats and dogs welcome, up to two pets per home
+• Pet fee: $300 one-time, per pet
+• Pet rent: $35/month per pet
+• Assistance animals are always welcome, and pet fees and limits don't apply
+
+APPLY AND TOUR
+• $0 application fee when you apply on the same day of your tour, or before your tour. Click ""Apply Now"" to lock in this offer.
+• Join a live virtual tour with your dedicated leasing manager at RenewedTours.com
+• Call or text: (513) 273-0211
+
+GOOD TO KNOW
+• Photos and tours may show a similar home or the mirror-image version of this floor plan.
+
+Pricing reflects the current advertised monthly rate for this home and may change based on availability, lease term and other factors. The flat utility fee is charged monthly in addition to base rent. Photos may show a similar home within the community, and features, finishes, appliances, views and layouts may vary. Some photos may be digitally staged. Information is deemed reliable but not guaranteed and is subject to change without notice. Renewed is an Equal Housing Opportunity provider and welcomes all qualified applicants.",https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997143,2026-11-21,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997143#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997143,OfferForLease,1450,USD,https://schema.org/InStock,2026-11-20,UnitPriceSpecification,USD,1450,QuantitativeValue,1,MON,Accommodation,"615 Ogden Ct, Oxford, OH, 45056","3 bed, 1.5 bath, 1,046 sq ft apartment for rent at 615 Ogden Ct, Oxford, OH. Available now, $1,450/mo.",Apartment,"https://www.google.com/maps/place/39.5034621,-84.750552",3,2,PostalAddress,615 Ogden Ct,Oxford,OH,45056,us,GeoCoordinates,39.5034621,-84.750552,QuantitativeValue,1046,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997143,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997142,"615 Ogden Ct, Oxford, OH, 45056","UNDER NEW MANAGEMENT
+A newly remodeled two-bedroom apartment of 755 sq ft at Oxford West in Oxford, OH, with stainless steel appliances, LVT flooring and modern finishes, minutes from Uptown Oxford.
+
+MONTHLY COST
+• Total due monthly: $1,450
+• Rent: $1,200
+• Flat utility fee: $250
+• The flat utility fee covers select utilities, so budgeting is simple. Ask our leasing team for details on what's included.
+
+THE HOME
+• Layout: two bedrooms and one full bath, with an open living and dining area
+• Size: 755 sq ft
+• Kitchen: stainless steel appliances
+• Laundry: in-home washer and dryer in select homes. Join a live virtual tour with your dedicated leasing manager to see what's available.
+• Heating and cooling: heating and air conditioning
+• Flooring: LVT flooring
+• Outdoor space: private balcony or patio in select homes
+
+THE COMMUNITY
+• Resort-style outdoor pool
+• Clubhouse and resident lounge
+• Outdoor lounge and fire pit
+• Secure package lockers
+• High-speed internet
+• Resident events
+• Free parking throughout the community
+
+AMENITIES INCLUDED
+• In the home: Open Living and Dining Area, Washer/Dryer (select homes), Air Conditioning, Heating, Stainless Steel Appliances, Oven/Range, Refrigerator, Vinyl Flooring, Balcony/Patio (select homes), High Speed Internet Access
+• Community: Pool, Clubhouse, Lounge, Fire Pit, Package Service, Free Parking (Surface Lot), Pet Friendly (Dogs Allowed, Cats Allowed)
+• Services: Maintenance on Site, 24-Hour Emergency Maintenance, Online Rent Payment, Online Maintenance Requests
+
+LOCATION
+Uptown Oxford's restaurants, cafés and shops are minutes away, with Kroger and Walmart close by for everyday errands. Hueston Woods State Park is a short drive north for hiking and the lake, and Miami University and McCullough-Hyde Memorial Hospital are both nearby. US-27 and OH-73 connect you to the wider region, with Cincinnati within an hour's drive.
+
+Whether you want more space, an easier commute or everyday essentials close to home, Oxford West has it all.
+
+WHY RESIDENTS CHOOSE RENEWED
+• In-house maintenance team with 24/7 emergency support
+• Non-emergency maintenance requests are handled in under 48 hours on average, but usually quicker
+• Pay rent and submit maintenance requests online through the resident portal
+• Every home is cleaned, fully inspected and move-in ready
+• Complete applications are typically processed within 24 hours, often the same day
+
+LEASE TERMS
+• Lease length: 12 months
+• Security deposit: $1,450
+
+PETS
+• Cats and dogs welcome, up to two pets per home
+• Pet fee: $300 one-time, per pet
+• Pet rent: $35/month per pet
+• Assistance animals are always welcome, and pet fees and limits don't apply
+
+APPLY AND TOUR
+• $0 application fee when you apply on the same day of your tour, or before your tour. Click ""Apply Now"" to lock in this offer.
+• Join a live virtual tour with your dedicated leasing manager at RenewedTours.com
+• Call or text: (513) 273-0211
+
+GOOD TO KNOW
+• Photos and tours may show a similar home or the mirror-image version of this floor plan.
+
+Pricing reflects the current advertised monthly rate for this home and may change based on availability, lease term and other factors. The flat utility fee is charged monthly in addition to base rent. Photos may show a similar home within the community, and features, finishes, appliances, views and layouts may vary. Some photos may be digitally staged. Information is deemed reliable but not guaranteed and is subject to change without notice. Renewed is an Equal Housing Opportunity provider and welcomes all qualified applicants.",https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997142,2026-11-21,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997142#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997142,OfferForLease,1200,USD,https://schema.org/InStock,2026-11-20,UnitPriceSpecification,USD,1200,QuantitativeValue,1,MON,Accommodation,"615 Ogden Ct, Oxford, OH, 45056","2 bed, 1 bath, 755 sq ft apartment for rent at 615 Ogden Ct, Oxford, OH. Available now, $1,200/mo.",Apartment,"https://www.google.com/maps/place/39.5034621,-84.750552",2,1,PostalAddress,615 Ogden Ct,Oxford,OH,45056,us,GeoCoordinates,39.5034621,-84.750552,QuantitativeValue,755,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13997142,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13992593,"615 Ogden Ct, Oxford, OH, 45056","UNDER NEW MANAGEMENT
+A newly remodeled 588 sq ft one-bedroom apartment at Oxford West in Oxford, OH, with a kitchen island, a study nook and modern finishes, minutes from Uptown Oxford.
+
+MONTHLY COST
+• Total due monthly: $1,200
+• Rent: $1,000
+• Flat utility fee: $200
+• The flat utility fee covers select utilities, so budgeting is simple. Ask our leasing team for details on what's included.
+
+THE HOME
+• Layout: one bedroom with a study area, plus an open living and dining space
+• Size: 588 sq ft
+• Kitchen: island seating and stainless steel appliances
+• Laundry: in-unit washer and dryer in select homes. Join a live virtual tour with your dedicated leasing manager to see what's available.
+• Heating and cooling: heating and air conditioning
+• Flooring: LVT flooring
+• Outdoor space: private balcony or patio in select homes
+
+THE COMMUNITY
+• Resort-style outdoor pool
+• Clubhouse and resident lounge
+• Outdoor lounge and fire pit
+• Secure package lockers
+• High-speed internet
+• Resident events
+• Free parking throughout the community
+
+AMENITIES INCLUDED
+• In the home: Island Kitchen, Study Area, Washer/Dryer (select homes), Air Conditioning, Heating, Stainless Steel Appliances, Oven/Range, Refrigerator, Vinyl Flooring, Balcony/Patio (select homes), High Speed Internet Access
+• Community: Pool, Clubhouse, Lounge, Fire Pit, Package Service, Free Parking (Surface Lot), Pet Friendly (Dogs Allowed, Cats Allowed)
+• Services: Maintenance on Site, 24-Hour Emergency Maintenance, Online Rent Payment, Online Maintenance Requests
+
+LOCATION
+Uptown Oxford's restaurants, cafés and shops are minutes away, with Kroger and Walmart close by for everyday errands. Hueston Woods State Park is a short drive north for hiking and the lake, and Miami University and McCullough-Hyde Memorial Hospital are both nearby. US-27 and OH-73 connect you to the wider region, with Cincinnati within an hour's drive.
+
+Whether you want more space, an easier commute or everyday essentials close to home, Oxford West has it all.
+
+WHY RESIDENTS CHOOSE RENEWED
+• In-house maintenance team with 24/7 emergency support
+• Non-emergency maintenance requests are handled in under 48 hours on average, but usually quicker
+• Pay rent and submit maintenance requests online through the resident portal
+• Every home is cleaned, fully inspected and move-in ready
+• Complete applications are typically processed within 24 hours, usually same-day. 
+
+LEASE TERMS
+• Lease length: 12 months
+• Security deposit: $1,200
+
+PETS
+• Cats and dogs welcome, up to two pets per home
+• Pet fee: $300 one-time, per pet
+• Pet rent: $35/month per pet
+• Assistance animals are always welcome, and pet fees and limits don't apply
+
+APPLY AND TOUR
+• $0 application fee when you apply on the same day of your tour, or before your tour. Click ""Apply Now"" to lock in this offer.
+• Join a live virtual tour with your dedicated leasing manager at RenewedTours.com
+• Call or text: (513) 273-0211
+
+GOOD TO KNOW
+• Photos and tours may show a similar home or the mirror-image version of this floor plan.
+
+Pricing reflects the current advertised monthly rate for this home and may change based on availability, lease term and other factors. The flat utility fee is charged monthly in addition to base rent. Photos may show a similar home within the community, and features, finishes, appliances, views and layouts may vary. Some photos may be digitally staged. Information is deemed reliable but not guaranteed and is subject to change without notice. Renewed is an Equal Housing Opportunity provider and welcomes all qualified applicants.",https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13992593,2026-11-20,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13992593#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13992593,OfferForLease,1000,USD,https://schema.org/InStock,2026-11-19,UnitPriceSpecification,USD,1000,QuantitativeValue,1,MON,Accommodation,"615 Ogden Ct, Oxford, OH, 45056","1 bed, 1 bath, 588 sq ft apartment for rent at 615 Ogden Ct, Oxford, OH. Available now, $1,000/mo.",Apartment,"https://www.google.com/maps/place/39.5034621,-84.750552",1,1,PostalAddress,615 Ogden Ct,Oxford,OH,45056,us,GeoCoordinates,39.5034621,-84.750552,QuantitativeValue,588,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/615-ogden-ct/13992593,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981437,"20 W Sycamore St. 2, Oxford, OH, 45056","20 W Sycamore puts you right in the center of it all. Located just steps from Uptown Oxford and minutes from Grocery Stores and Miami University’s campus, this property offers one of the most convenient locations in town.
+
+No long walks. No fighting for parking uptown. Everything you need is right outside your door — restaurants, coffee shops, farmers market, and campus buildings.
+
+Inside, the home features:• Spacious bedrooms• Comfortable common living areas• Functional layout• Prime Uptown location
+
+Properties like this don’t last — schedule your tour today!",https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981437,2026-11-18,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981437#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981437,OfferForLease,1600,USD,https://schema.org/InStock,2026-11-17,UnitPriceSpecification,USD,1600,QuantitativeValue,1,MON,Accommodation,"20 W Sycamore St. 2, Oxford, OH, 45056","4 bed, 2 bath apartment for rent at 20 W Sycamore St. 2, Oxford, OH. Available now, $1,600/mo.",Apartment,"https://www.google.com/maps/place/39.5153705,-84.7436884",4,2,PostalAddress,20 W Sycamore St. 2,Oxford,OH,45056,us,GeoCoordinates,39.5153705,-84.7436884,NA,NA,NA,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981437,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981436,"20 W Sycamore St. 2, Oxford, OH, 45056","20 W Sycamore puts you right in the center of it all. Located just steps from Uptown Oxford and minutes from Grocery Stores and Miami University’s campus, this property offers one of the most convenient locations in town.
+
+No long walks. No fighting for parking uptown. Everything you need is right outside your door — restaurants, coffee shops, farmers market, and campus buildings.
+
+Inside, the home features:• Spacious bedrooms• Comfortable common living areas• Functional layout• Prime Uptown location
+
+Properties like this don’t last — schedule your tour today!",https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981436,2026-11-18,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981436#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981436,OfferForLease,1600,USD,https://schema.org/InStock,2026-11-17,UnitPriceSpecification,USD,1600,QuantitativeValue,1,MON,Accommodation,"20 W Sycamore St. 2, Oxford, OH, 45056","4 bed, 2 bath apartment for rent at 20 W Sycamore St. 2, Oxford, OH. Available now, $1,600/mo.",Apartment,"https://www.google.com/maps/place/39.5153705,-84.7436884",4,2,PostalAddress,20 W Sycamore St. 2,Oxford,OH,45056,us,GeoCoordinates,39.5153705,-84.7436884,NA,NA,NA,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/20-w-sycamore-st/13981436,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/321-s-main-st/13172852,"321 S. Main St., Oxford, OH, 45056","321 S Main – 7 Bedroom | 2.5 Bath | Private Parking | Huge Private Backyard
+
+Now leasing this spacious 7-bedroom, 2.5-bath home in a prime location on S Main! This property offers the space and layout you need with the convenience you want.
+
+Property Highlights:
+
+7 generously sized bedrooms
+
+2.5 bathrooms
+
+Private off-street parking
+
+Huge private backyard 
+
+Large common living areas
+
+Functional kitchen with plenty of cabinet space
+
+With private parking and an oversized backyard, it’s a rare find.",https://www.rentler.com/places-for-rent/oh/oxford/321-s-main-st/13172852,2026-06-18,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/321-s-main-st/13172852#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/321-s-main-st/13172852,OfferForLease,2000,USD,https://schema.org/InStock,2026-11-17,UnitPriceSpecification,USD,2000,QuantitativeValue,1,MON,Accommodation,"321 S. Main St., Oxford, OH, 45056","7 bed, 2.5 bath apartment for rent at 321 S. Main St., Oxford, OH. Available now, $2,000/mo.",Apartment,"https://www.google.com/maps/place/39.506233,-84.7422276",7,3,PostalAddress,321 S. Main St.,Oxford,OH,45056,us,GeoCoordinates,39.506233,-84.7422276,NA,NA,NA,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/321-s-main-st/13172852,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/650-mcguffey-ave/13877979,"650 McGuffey Ave., Oxford, OH, 45056","650 McGuffey Ave #3 – Oxford, OH
+2 Bed | 1.5 Bath | Apartment
+
+Welcome to this well-located 2-bedroom, 1.5-bath unit in the heart of Oxford. Situated on McGuffey Avenue, this property offers a great combination of convenience and comfort, just minutes from campus and Uptown.
+
+This unit features a spacious, functional layout with a comfortable living area, two well-sized bedrooms, and a full bath upstairs along with a convenient half bath on the main level. The kitchen is equipped with essential appliances and ample cabinet space, making it ideal for everyday living.
+
+Enjoy the benefits of off-street parking and a location within close proximity to Miami University, parks, shopping, and dining. The McGuffey area is a popular choice due to its accessibility and neighborhood feel.
+
+Property Features:
+
+2 Bedrooms / 1.5 Bathrooms
+Two-level layout
+Half bath on main level for added convenience
+Off-street parking available
+Prime location near campus & Uptown Oxford
+Professionally managed property
+
+This unit is perfect for those looking for a comfortable, conveniently located home with easy access to everything Oxford has to offer.",https://www.rentler.com/places-for-rent/oh/oxford/650-mcguffey-ave/13877979,2026-10-28,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/650-mcguffey-ave/13877979#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/650-mcguffey-ave/13877979,OfferForLease,1000,USD,https://schema.org/InStock,2026-08-11,UnitPriceSpecification,USD,1000,QuantitativeValue,1,MON,Accommodation,"650 McGuffey Ave., Oxford, OH, 45056","2 bed, 1.5 bath apartment for rent at 650 McGuffey Ave., Oxford, OH. Available now, $1,000/mo.",Apartment,"https://www.google.com/maps/place/39.5033964,-84.7530601",2,2,PostalAddress,650 McGuffey Ave.,Oxford,OH,45056,us,GeoCoordinates,39.5033964,-84.7530601,NA,NA,NA,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/650-mcguffey-ave/13877979,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792671,"216 E Sycamore Street, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792671,2026-10-13,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792671#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792671,OfferForLease,3750,USD,https://schema.org/InStock,2023-12-18,UnitPriceSpecification,USD,3750,QuantitativeValue,1,MON,Accommodation,"216 E Sycamore Street, Oxford, OH, 45056","1 bath, 365 sq ft apartment for rent at 216 E Sycamore Street, Oxford, OH. Available now, $3,750/mo.",Apartment,"https://www.google.com/maps/place/39.5153673,-84.7380901",0,1,PostalAddress,216 E Sycamore Street,Oxford,OH,45056,us,GeoCoordinates,39.5153673,-84.7380901,QuantitativeValue,365,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792671,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792670,"216 E Sycamore Street, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792670,2026-10-13,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792670#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792670,OfferForLease,3870,USD,https://schema.org/InStock,2023-12-16,UnitPriceSpecification,USD,3870,QuantitativeValue,1,MON,Accommodation,"216 E Sycamore Street, Oxford, OH, 45056","1 bath, 435 sq ft apartment for rent at 216 E Sycamore Street, Oxford, OH. Available now, $3,870/mo.",Apartment,"https://www.google.com/maps/place/39.5153673,-84.7380901",0,1,PostalAddress,216 E Sycamore Street,Oxford,OH,45056,us,GeoCoordinates,39.5153673,-84.7380901,QuantitativeValue,435,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/216-e-sycamore-street/13792670,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/306-n-main-st/13792669,"306 N Main St, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/306-n-main-st/13792669,2026-10-13,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/306-n-main-st/13792669#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/306-n-main-st/13792669,OfferForLease,3960,USD,https://schema.org/InStock,2023-08-18,UnitPriceSpecification,USD,3960,QuantitativeValue,1,MON,Accommodation,"306 N Main St, Oxford, OH, 45056","1 bath, 365 sq ft apartment for rent at 306 N Main St, Oxford, OH. Available now, $3,960/mo.",Apartment,"https://www.google.com/maps/place/39.5142257,-84.742651",0,1,PostalAddress,306 N Main St,Oxford,OH,45056,us,GeoCoordinates,39.5142257,-84.742651,QuantitativeValue,365,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/306-n-main-st/13792669,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/712-s-poplar-street/13792668,"712 S Poplar Street, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/712-s-poplar-street/13792668,2026-10-13,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/712-s-poplar-street/13792668#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/712-s-poplar-street/13792668,OfferForLease,3960,USD,https://schema.org/InStock,2024-08-23,UnitPriceSpecification,USD,3960,QuantitativeValue,1,MON,Accommodation,"712 S Poplar Street, Oxford, OH, 45056","1 bath, 365 sq ft apartment for rent at 712 S Poplar Street, Oxford, OH. Available now, $3,960/mo.",Apartment,"https://www.google.com/maps/place/39.5018538,-84.7412942",0,1,PostalAddress,712 S Poplar Street,Oxford,OH,45056,us,GeoCoordinates,39.5018538,-84.7412942,QuantitativeValue,365,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/712-s-poplar-street/13792668,NA,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665159,"5081 Red Cloud Court, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665159,2026-09-16,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665159#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665159,OfferForLease,1750,USD,https://schema.org/InStock,2026-11-23,UnitPriceSpecification,USD,1750,QuantitativeValue,1,MON,Accommodation,"5081 Red Cloud Court, Oxford, OH, 45056","2 bed, 1.5 bath, 961 sq ft apartment for rent at 5081 Red Cloud Court, Oxford, OH. Available now, $1,750/mo.",Apartment,"https://www.google.com/maps/place/39.4914911,-84.7260056",2,2,PostalAddress,5081 Red Cloud Court,Oxford,OH,45056,us,GeoCoordinates,39.4914911,-84.7260056,QuantitativeValue,961,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665159,TRUE,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665158,"5081 Red Cloud Court, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665158,2026-09-16,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665158#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665158,OfferForLease,1299,USD,https://schema.org/InStock,2026-11-23,UnitPriceSpecification,USD,1299,QuantitativeValue,1,MON,Accommodation,"5081 Red Cloud Court, Oxford, OH, 45056","2 bed, 1 bath, 821 sq ft apartment for rent at 5081 Red Cloud Court, Oxford, OH. Available now, $1,299/mo.",Apartment,"https://www.google.com/maps/place/39.4914911,-84.7260056",2,1,PostalAddress,5081 Red Cloud Court,Oxford,OH,45056,us,GeoCoordinates,39.4914911,-84.7260056,QuantitativeValue,821,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665158,TRUE,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665156,"5081 Red Cloud Court, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665156,2026-09-16,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665156#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665156,OfferForLease,1299,USD,https://schema.org/InStock,2026-11-23,UnitPriceSpecification,USD,1299,QuantitativeValue,1,MON,Accommodation,"5081 Red Cloud Court, Oxford, OH, 45056","2 bed, 1 bath, 821 sq ft apartment for rent at 5081 Red Cloud Court, Oxford, OH. Available now, $1,299/mo.",Apartment,"https://www.google.com/maps/place/39.4914911,-84.7260056",2,1,PostalAddress,5081 Red Cloud Court,Oxford,OH,45056,us,GeoCoordinates,39.4914911,-84.7260056,QuantitativeValue,821,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665156,TRUE,2026-11-23
+RealEstateListing,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665154,"5081 Red Cloud Court, Oxford, OH, 45056",Contact for details.,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665154,2026-09-16,NA,NA,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665154#breadcrumb,RentAction,EntryPoint,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665154,OfferForLease,1299,USD,https://schema.org/InStock,2026-11-23,UnitPriceSpecification,USD,1299,QuantitativeValue,1,MON,Accommodation,"5081 Red Cloud Court, Oxford, OH, 45056","2 bed, 1 bath, 821 sq ft apartment for rent at 5081 Red Cloud Court, Oxford, OH. Available now, $1,299/mo.",Apartment,"https://www.google.com/maps/place/39.4914911,-84.7260056",2,1,PostalAddress,5081 Red Cloud Court,Oxford,OH,45056,us,GeoCoordinates,39.4914911,-84.7260056,QuantitativeValue,821,FTK,https://www.rentler.com/#organization,https://www.rentler.com/places-for-rent/oh/oxford/5081-red-cloud-court/13665154,TRUE,2026-11-23

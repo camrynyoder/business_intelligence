@@ -1,0 +1,33 @@
+dataset,record,source,rule,action
+listings,615 Ogden Ct,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,20 W Sycamore St.,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,321 S Main St,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,650 Mcguffey Ave,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,216 E Sycamore St,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,712 S Poplar St,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,306 N Main St,Zumper,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,321 S. Main St.,ApartmentList,Duplicate: same building listed on another site,Excluded; kept the higher-priority site's version
+listings,Miami Preserve - Student Housing,ApartmentList,Missing bedrooms,Excluded from HUD comparison
+listings,331 East Chestnut Street,ApartmentList,Missing bedrooms,Excluded from HUD comparison
+listings,5422 College Corner Pk Apt 220,ApartmentList,Missing bedrooms,Excluded from HUD comparison
+listings,321 S. Main St.,Rentler,More than 4 bedrooms (no HUD benchmark),Excluded from HUD comparison
+listings,609 S Main St,Zumper,Price over 2x HUD rent and price period not stated,Flagged as price period unclear
+listings,816 S College Ave #816,Zumper,Price over 2x HUD rent and price period not stated,Flagged as price period unclear
+listings,216 E Sycamore Street,Rentler,Price over 2x HUD rent and price period not stated,Flagged as price period unclear
+listings,216 E Sycamore Street,Rentler,Price over 2x HUD rent and price period not stated,Flagged as price period unclear
+listings,306 N Main St,Rentler,Price over 2x HUD rent and price period not stated,Flagged as price period unclear
+listings,712 S Poplar Street,Rentler,Price over 2x HUD rent and price period not stated,Flagged as price period unclear
+listings,216 E Sycamore Street,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,216 E Sycamore Street,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,306 N Main St,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,712 S Poplar Street,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,5081 Red Cloud Court,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,5081 Red Cloud Court,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,5081 Red Cloud Court,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,5081 Red Cloud Court,Rentler,Listing gives no details ('Contact for details.'),LLM fields left as not_stated
+listings,816 S College Ave #816,Zumper,Site and LLM disagree on property type,Kept the site's type; noted the disagreement
+listings,20 W Sycamore St. 2,Rentler,Site and LLM disagree on property type,Kept the site's type; noted the disagreement
+listings,20 W Sycamore St. 2,Rentler,Site and LLM disagree on property type,Kept the site's type; noted the disagreement
+listings,321 S. Main St.,Rentler,Site and LLM disagree on property type,Kept the site's type; noted the disagreement
+Miami cost of attendance,Non-Resident Surcharge (table 3),miamioh.edu,Per-semester amount x 2 does not equal annual amount,Noted as an error on Miami's page; this row is not used in our analysis
+Miami cost of attendance,Housing (Off-Campus) (table 4),miamioh.edu,Per-semester amount x 2 does not equal annual amount,Noted as an error on Miami's page; this row is not used in our analysis

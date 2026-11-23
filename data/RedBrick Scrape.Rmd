@@ -1,0 +1,85 @@
+---
+title: "RedBrick Scrape"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup}
+dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
+```
+
+```{r packages}
+#Install necessary packages
+install.packages(c("httr2", "rvest", "jsonlite", "dplyr", "tidyr", "readr",
+                   "stringr", "purrr", "robotstxt", "ellmer"))
+```
+
+## Purpose
+Scrape Red Brick Property Management's 2027-28 student listings. Each listing page has its details as "Label: value" lines, so we pull each label with a regular expression.
+
+## Check permission
+```{r robots}
+robotstxt::paths_allowed(paths = "/listings/", domain = "redbrickmiami.com")
+```
+
+## Collect listing links
+```{r links}
+rb_index = rvest::read_html("https://redbrickmiami.com/studentrentals/2027-2028-student_rentals/")
+rb_links = rb_index |>
+  rvest::html_elements("a[href*='/listings/']") |>
+  rvest::html_attr("href") |>
+  unique()
+length(rb_links)
+```
+
+## Function to read one listing page
+```{r function}
+get_redbrick = function(url) {
+  txt = rvest::read_html(url) |> rvest::html_text2()
+  grab = function(label) {
+    stringr::str_match(txt, paste0("(?m)^", label, ":[ \\t]*([^\\r\\n]*)"))[, 2] |>
+      stringr::str_trim()
+  }
+  Sys.sleep(1)
+  data.frame(
+    link       = url,
+    address    = grab("Address"),
+    house_name = grab("House Name"),
+    price_text = grab("Price"),
+    rent_type  = grab("Rent Type"),
+    residents  = grab("Number of Residents"),
+    bedrooms   = grab("Bedrooms"),
+    bathrooms  = grab("Bathrooms")
+  )
+}
+
+# test on 3 listings first
+purrr::map_df(.x = rb_links[1:3], .f = get_redbrick)
+```
+
+## Scrape all listings and save the raw data
+```{r scrape}
+redbrick_raw = purrr::map_df(.x = rb_links, .f = purrr::possibly(get_redbrick, otherwise = NULL)) |>
+  dplyr::mutate(company = "Red Brick", scrape_date = Sys.Date())
+readr::write_csv(redbrick_raw, "data/redbrick_raw.csv")
+```
+
+## Clean
+```{r clean}
+redbrick_raw |>
+  dplyr::mutate(
+    price     = readr::parse_number(price_text),
+    residents = readr::parse_number(residents),
+    bedrooms  = readr::parse_number(bedrooms),
+    bathrooms = readr::parse_number(bathrooms)
+  ) -> redbrick
+
+nrow(redbrick)
+sum(!is.na(redbrick$price))   # how many listings have a price
+redbrick |> dplyr::filter(!is.na(price)) |> head(10)
+```
