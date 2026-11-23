@@ -9,15 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup}
+```{r setup2}
 dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
 ```
 
-```{r packages}
-#Install necessary packages
-install.packages(c("httr2", "rvest", "jsonlite", "dplyr", "tidyr", "readr",
-                   "stringr", "purrr", "robotstxt", "ellmer"))
-```
 
 ## Purpose
 Scrape Red Brick Property Management's 2027-28 student listings. Each listing page has its details as "Label: value" lines, so we pull each label with a regular expression.

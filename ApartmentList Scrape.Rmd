@@ -1,0 +1,51 @@
+---
+title: "ApartmentList Scrape"
+author: "Camryn Yoder, Lindsey Carothers & Amelia Hopkins"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+Scrape Oxford, OH listings from ApartmentList. The listings are stored as JSON inside the page. ApartmentList only had a few Oxford listings, which is why we added Zumper and Rentler.
+
+## Check permission
+```{r robots}
+robotstxt::paths_allowed(paths = "/oh/oxford", domain = "apartmentlist.com")
+```
+
+## Scraping function
+```{r function}
+get_listings = function(url) {
+  pg = rvest::read_html(url)
+  pg |>
+    rvest::html_elements("script[type='application/ld+json']") |>
+    rvest::html_text2() |>
+    purrr::keep(\(x) stringr::str_detect(x, "\"@type\":\"Product\"")) |>
+    purrr::map_df(\(x) jsonlite::fromJSON(x, flatten = TRUE)) -> df
+  Sys.sleep(1)
+  return(df)
+}
+```
+
+## Find every page and scrape
+```{r scrape}
+base = "https://www.apartmentlist.com/oh/oxford"
+page_links = rvest::read_html(base) |>
+  rvest::html_elements("a[href*='/oh/oxford/page-']") |>
+  rvest::html_attr("href") |>
+  unique()
+oxford_urls = c(base, if (length(page_links) > 0) paste0("https://www.apartmentlist.com", page_links))
+
+listings_raw = purrr::map_df(.x = oxford_urls, .f = get_listings) |>
+  dplyr::mutate(scrape_date = Sys.Date())
+readr::write_csv(listings_raw, "data/apartmentlist_oxford_raw.csv")
+
+listings_raw |>
+  dplyr::filter(stringr::str_detect(url, "/oh/oxford/")) |>
+  dplyr::distinct(url, .keep_all = TRUE) |>
+  dplyr::select(name, url, offers.lowPrice, offers.highPrice)
+```

@@ -61,8 +61,10 @@ make_key = function(x) {
   x |>
     stringr::str_to_lower() |>
     stringr::str_remove_all("\\.") |>
+    stringr::str_replace_all(c("\\beast\\b" = "e", "\\bwest\\b" = "w",
+                               "\\bnorth\\b" = "n", "\\bsouth\\b" = "s")) |>
     stringr::str_squish() |>
-    stringr::str_extract("^[0-9]+ ([nsew] )?[a-z]+")  # e.g. "321 s main"
+    stringr::str_extract("^[0-9]+ ([nsew] )?[a-z]+")
 }
 
 building_info = zumper_std |>
